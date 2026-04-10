@@ -1,0 +1,281 @@
+openapi: 3.1.0
+info:
+  title: Flight Fare Search Contract
+  version: 0.1.0
+  description: >
+    機票比價入口在 Rails server-rendered 頁面、Hotwire/Stimulus 輪詢流程與
+    內部前後端互動所需的 HTTP 契約；這不是獨立對外開放 API。
+servers:
+  - url: http://localhost:3000
+paths:
+  /search_requests:
+    post:
+      summary: 建立新的機票搜尋請求
+      operationId: createSearchRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSearchRequest'
+      responses:
+        '202':
+          description: 搜尋請求已建立並排程背景工作
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchRequestAccepted'
+        '422':
+          description: 輸入驗證失敗
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+  /search_requests/{searchRequestId}:
+    get:
+      summary: 取得搜尋請求摘要與來源狀態
+      operationId: showSearchRequest
+      parameters:
+        - $ref: '#/components/parameters/SearchRequestId'
+      responses:
+        '200':
+          description: 搜尋請求摘要
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchRequestStatus'
+        '404':
+          description: 搜尋請求不存在
+  /search_requests/{searchRequestId}/results:
+    get:
+      summary: 取得已彙整的搜尋結果
+      operationId: listSearchResults
+      parameters:
+        - $ref: '#/components/parameters/SearchRequestId'
+        - in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+            enum: [price, outbound_departure, return_departure, total_travel_time]
+      responses:
+        '200':
+          description: 搜尋結果與推薦
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResultsResponse'
+        '404':
+          description: 搜尋請求不存在
+components:
+  parameters:
+    SearchRequestId:
+      in: path
+      name: searchRequestId
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    CreateSearchRequest:
+      type: object
+      required:
+        - tripType
+        - directOnly
+        - departureWindowStartOn
+        - departureWindowEndOn
+        - stayLengthDays
+        - displayCurrency
+      properties:
+        tripType:
+          type: string
+          enum: [one_way, round_trip, multi_city]
+        originAirportCode:
+          type: string
+        destinationAirportCode:
+          type: string
+        directOnly:
+          type: boolean
+        departureWindowStartOn:
+          type: string
+          format: date
+        departureWindowEndOn:
+          type: string
+          format: date
+        stayLengthDays:
+          type: integer
+          minimum: 1
+        displayCurrency:
+          type: string
+        itineraryLegs:
+          type: array
+          minItems: 0
+          maxItems: 4
+          items:
+            $ref: '#/components/schemas/ItineraryLegInput'
+    ItineraryLegInput:
+      type: object
+      required:
+        - position
+        - originAirportCode
+        - destinationAirportCode
+      properties:
+        position:
+          type: integer
+          minimum: 1
+          maximum: 4
+        originAirportCode:
+          type: string
+        destinationAirportCode:
+          type: string
+        departureOn:
+          type: string
+          format: date
+    SearchRequestAccepted:
+      type: object
+      required: [searchRequestId, status, resultsUrl]
+      properties:
+        searchRequestId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [queued]
+        resultsUrl:
+          type: string
+    SearchRequestStatus:
+      type: object
+      required: [searchRequestId, status, sourceStatuses]
+      properties:
+        searchRequestId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [queued, running, partially_completed, completed, failed]
+        sourceStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceStatus'
+    SearchResultsResponse:
+      type: object
+      required: [searchRequestId, status, displayCurrency, sourceStatuses, offers]
+      properties:
+        searchRequestId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [queued, running, partially_completed, completed, failed]
+        displayCurrency:
+          type: string
+        recommendation:
+          $ref: '#/components/schemas/Recommendation'
+        sourceStatuses:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceStatus'
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+    SourceStatus:
+      type: object
+      required: [sourceKey, status]
+      properties:
+        sourceKey:
+          type: string
+        status:
+          type: string
+          enum: [pending, fetching, succeeded, no_results, timed_out, failed, disabled]
+        errorCode:
+          type: string
+          nullable: true
+        fetchedAt:
+          type: string
+          format: date-time
+          nullable: true
+    Offer:
+      type: object
+      required:
+        - offerId
+        - sourceKey
+        - originalCurrency
+        - displayCurrency
+        - totalAmount
+        - normalizedTotalAmount
+        - directFlight
+        - totalTravelMinutes
+        - outboundDepartureAt
+        - outboundArrivalAt
+        - bookingUrl
+      properties:
+        offerId:
+          type: string
+          format: uuid
+        sourceKey:
+          type: string
+        originalCurrency:
+          type: string
+        displayCurrency:
+          type: string
+        totalAmount:
+          type: number
+        normalizedTotalAmount:
+          type: number
+        directFlight:
+          type: boolean
+        totalTravelMinutes:
+          type: integer
+        outboundDepartureAt:
+          type: string
+          format: date-time
+        outboundArrivalAt:
+          type: string
+          format: date-time
+        returnDepartureAt:
+          type: string
+          format: date-time
+          nullable: true
+        returnArrivalAt:
+          type: string
+          format: date-time
+          nullable: true
+        bookingUrl:
+          type: string
+          format: uri
+        itinerary:
+          type: array
+          items:
+            type: object
+        priceDisclosure:
+          type: string
+        seatAvailabilityDisclosure:
+          type: string
+        exchangeRateDisclosure:
+          type: string
+    Recommendation:
+      type: object
+      required: [offerId, reasonCode, explanation]
+      properties:
+        offerId:
+          type: string
+          format: uuid
+        reasonCode:
+          type: string
+        explanation:
+          type: string
+    ValidationError:
+      type: object
+      required: [errors]
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            required: [field, message]
+            properties:
+              field:
+                type: string
+              message:
+                type: string

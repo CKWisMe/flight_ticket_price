@@ -1,0 +1,25 @@
+default: &default
+  sources:
+    skyscanner:
+      enabled: true
+      timeout_seconds: 15
+      currency: USD
+      base_fare_amount: 8200
+      taxes_and_fees_amount: 1800
+      duration_offset_minutes: 0
+    trip_com:
+      enabled: true
+      timeout_seconds: 15
+      currency: TWD
+      base_fare_amount: 9400
+      taxes_and_fees_amount: 2200
+      duration_offset_minutes: 55
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

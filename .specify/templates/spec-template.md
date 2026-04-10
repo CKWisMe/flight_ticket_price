@@ -94,8 +94,9 @@
 - **FR-010**: UI-facing work MUST define accessibility expectations sufficient to
   verify WCAG 2.1 AA compliance.
 - **FR-011**: System MUST produce all generated Markdown planning and
-  specification artifacts in `zh-TW`, except where English is required for
-  code, commands, protocol fields, or necessary proper nouns.
+  specification artifacts, analysis reports, and remediation summaries in
+  `zh-TW`, except where English is required for code, commands, protocol
+  fields, or necessary proper nouns.
 
 *不明需求的標示範例：*
 

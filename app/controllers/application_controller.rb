@@ -4,4 +4,15 @@ class ApplicationController < ActionController::Base
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
+
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
+  private
+
+  def render_not_found
+    respond_to do |format|
+      format.html { redirect_to root_path, alert: "找不到指定的搜尋請求" }
+      format.json { render json: { error: "not_found" }, status: :not_found }
+    end
+  end
 end

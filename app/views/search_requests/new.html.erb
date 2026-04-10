@@ -1,0 +1,83 @@
+<div class="page-shell">
+  <section class="hero-card">
+    <p class="eyebrow">Flight Fare Search</p>
+    <h1>機票比價入口</h1>
+    <p class="hero-copy">輸入航線、日期區間與旅遊天數後，系統會逐步整合多個售票來源結果。</p>
+  </section>
+
+  <section class="panel">
+    <%= form_with url: search_requests_path, scope: :search_request, class: "search-form", data: { controller: "itinerary-builder" } do |form| %>
+      <div class="form-grid">
+        <div class="field">
+          <%= form.label :trip_type, "航程型態" %>
+          <%= form.select :trip_type, [["單程", "one_way"], ["來回", "round_trip"], ["多點進出", "multi_city"]], { selected: @search_request.trip_type }, data: { action: "change->itinerary-builder#tripTypeChanged", itinerary_builder_target: "tripType" } %>
+        </div>
+        <div class="field">
+          <%= form.label :origin_airport_code, "起飛機場" %>
+          <%= form.text_field :origin_airport_code, required: true, placeholder: "TPE", value: @search_request.origin_airport_code %>
+        </div>
+        <div class="field">
+          <%= form.label :destination_airport_code, "目的地機場" %>
+          <%= form.text_field :destination_airport_code, required: true, placeholder: "NRT", value: @search_request.destination_airport_code %>
+        </div>
+        <div class="field checkbox-field">
+          <%= form.label :direct_only do %>
+            <%= form.check_box :direct_only, checked: @search_request.direct_only %>
+            僅直飛
+          <% end %>
+        </div>
+        <div class="field">
+          <%= form.label :departure_window_start_on, "可出發起始日" %>
+          <%= form.date_field :departure_window_start_on, required: true, value: @search_request.departure_window_start_on %>
+        </div>
+        <div class="field">
+          <%= form.label :departure_window_end_on, "可出發截止日" %>
+          <%= form.date_field :departure_window_end_on, required: true, value: @search_request.departure_window_end_on %>
+        </div>
+        <div class="field">
+          <%= form.label :stay_length_days, "旅遊天數" %>
+          <%= form.number_field :stay_length_days, min: 1, required: true, value: @search_request.stay_length_days, data: { action: "input->itinerary-builder#validate" } %>
+        </div>
+        <div class="field">
+          <%= form.label :display_currency, "顯示幣別" %>
+          <%= form.select :display_currency, [["TWD", "TWD"], ["USD", "USD"], ["JPY", "JPY"]], { selected: @search_request.display_currency }, required: true %>
+        </div>
+      </div>
+
+      <div class="validation-message" data-itinerary-builder-target="validation"></div>
+
+      <section class="panel nested-panel is-hidden" data-itinerary-builder-target="legsSection">
+        <div class="section-heading">
+          <h2>多點進出航段</h2>
+          <button type="button" class="secondary-button" data-action="itinerary-builder#addLeg">新增航段</button>
+        </div>
+        <div class="legs-list" data-itinerary-builder-target="legsList"></div>
+      </section>
+
+      <template data-itinerary-builder-target="template">
+        <div class="leg-row">
+          <div class="field">
+            <label>航段順序</label>
+            <input type="number" name="search_request[itinerary_legs][][position]" min="1" max="4" required>
+          </div>
+          <div class="field">
+            <label>起飛機場</label>
+            <input type="text" name="search_request[itinerary_legs][][origin_airport_code]" placeholder="TPE" required>
+          </div>
+          <div class="field">
+            <label>目的地機場</label>
+            <input type="text" name="search_request[itinerary_legs][][destination_airport_code]" placeholder="KIX" required>
+          </div>
+          <div class="field">
+            <label>指定日期</label>
+            <input type="date" name="search_request[itinerary_legs][][departure_on]">
+          </div>
+        </div>
+      </template>
+
+      <div class="actions">
+        <%= form.submit "開始搜尋", class: "primary-button" %>
+      </div>
+    <% end %>
+  </section>
+</div>
