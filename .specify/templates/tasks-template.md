@@ -5,15 +5,17 @@ description: "Task list template for feature implementation"
 
 # Tasks: [FEATURE NAME]
 
-**Input**: Design documents from `/specs/[###-feature-name]/`
+**Input**: 來自 `/specs/[###-feature-name]/` 的設計文件
 **Prerequisites**: plan.md (required), spec.md (required for user stories),
 research.md, data-model.md, contracts/
 
-**Tests**: Automated tests are REQUIRED for every feature and every logic
-change. Each user story MUST include the test work needed to prove behavior.
+**Tests**: 每個功能與每次邏輯變更都 REQUIRED 自動化測試。每個使用者故事都
+MUST 包含足以證明行為的測試工作。
 
-**Organization**: Tasks are grouped by user story to enable independent
-implementation and testing of each story.
+**Organization**: 任務依使用者故事分組，讓每個故事都能獨立實作與驗證。
+
+**Language Rule**: 產出的 `tasks.md` 敘述文字必須以 `zh-TW` 撰寫；程式碼、
+命令、協定欄位與必要專有名詞可保留英文。
 
 ## Format: `[ID] [P?] [Story] Description`
 
@@ -27,37 +29,37 @@ implementation and testing of each story.
 - **Split app**: adapt paths to the structure selected in `plan.md`
 
 <!--
-  IMPORTANT: The tasks below are SAMPLE TASKS for illustration purposes only.
-  The /speckit.tasks command MUST replace these with actual tasks based on the
-  feature artifacts.
+  IMPORTANT: 下方任務僅為示意範例。
+  /speckit.tasks 指令 MUST 依據實際功能產物將其完全替換。
 -->
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-**Purpose**: Project initialization and basic structure
+**Purpose**: 專案初始化與基本結構
 
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize framework dependencies and runtime configuration
 - [ ] T003 [P] Configure linting, formatting, and test execution tools
 - [ ] T004 [P] Review existing services, repositories, helpers, and utilities to
   prevent duplicate logic
+- [ ] T005 [P] Confirm generated Markdown deliverables for this feature are
+  authored in `zh-TW`
 
 ---
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-**Purpose**: Core infrastructure that MUST be complete before ANY user story can
-be implemented
+**Purpose**: 在任何使用者故事開始前都 MUST 完成的核心基礎建設
 
-- [ ] T005 Setup database schema and migrations framework
-- [ ] T006 [P] Implement authentication and authorization framework
-- [ ] T007 [P] Setup routing and middleware structure
-- [ ] T008 Create base models or entities that all stories depend on
-- [ ] T009 Create service and repository base structure for business and
+- [ ] T006 Setup database schema and migrations framework
+- [ ] T007 [P] Implement authentication and authorization framework
+- [ ] T008 [P] Setup routing and middleware structure
+- [ ] T009 Create base models or entities that all stories depend on
+- [ ] T010 Create service and repository base structure for business and
   persistence logic
-- [ ] T010 Configure error handling and logging infrastructure without exposing
+- [ ] T011 Configure error handling and logging infrastructure without exposing
   PII
-- [ ] T011 Setup environment configuration and secret management
+- [ ] T012 Setup environment configuration and secret management
 
 **Checkpoint**: Foundation ready. User story implementation can now begin.
 
@@ -73,20 +75,21 @@ be implemented
 
 > **NOTE: Write these tests FIRST and ensure they FAIL before implementation**
 
-- [ ] T012 [P] [US1] Add automated test coverage for the story and capture the
+- [ ] T013 [P] [US1] Add automated test coverage for the story and capture the
   failing expectation first
-- [ ] T013 [P] [US1] Add integration coverage for the user journey when the
+- [ ] T014 [P] [US1] Add integration coverage for the user journey when the
   story crosses boundaries
 
 ### Implementation for User Story 1
 
-- [ ] T014 [P] [US1] Create or update entities required by the story
-- [ ] T015 [US1] Implement service logic for the story
-- [ ] T016 [US1] Implement repository or persistence boundary changes required by
+- [ ] T015 [P] [US1] Create or update entities required by the story
+- [ ] T016 [US1] Implement service logic for the story
+- [ ] T017 [US1] Implement repository or persistence boundary changes required by
   the story
-- [ ] T017 [US1] Implement route or UI integration without moving business logic
+- [ ] T018 [US1] Implement route or UI integration without moving business logic
   into handlers
-- [ ] T018 [US1] Add validation, privacy-safe logging, and error handling
+- [ ] T019 [US1] Add validation, privacy-safe logging, error handling, and
+  zh-TW documentation updates required by the story
 
 **Checkpoint**: User Story 1 is fully functional and independently testable.
 
@@ -100,18 +103,18 @@ be implemented
 
 ### Tests for User Story 2
 
-- [ ] T019 [P] [US2] Add automated test coverage for the story and capture the
+- [ ] T020 [P] [US2] Add automated test coverage for the story and capture the
   failing expectation first
-- [ ] T020 [P] [US2] Add integration coverage for the user journey when the
+- [ ] T021 [P] [US2] Add integration coverage for the user journey when the
   story crosses boundaries
 
 ### Implementation for User Story 2
 
-- [ ] T021 [P] [US2] Create or update entities required by the story
-- [ ] T022 [US2] Implement service logic for the story
-- [ ] T023 [US2] Implement repository or persistence boundary changes required by
+- [ ] T022 [P] [US2] Create or update entities required by the story
+- [ ] T023 [US2] Implement service logic for the story
+- [ ] T024 [US2] Implement repository or persistence boundary changes required by
   the story
-- [ ] T024 [US2] Implement route or UI integration with preserved architecture
+- [ ] T025 [US2] Implement route or UI integration with preserved architecture
 
 **Checkpoint**: User Stories 1 and 2 both work independently.
 
@@ -125,18 +128,18 @@ be implemented
 
 ### Tests for User Story 3
 
-- [ ] T025 [P] [US3] Add automated test coverage for the story and capture the
+- [ ] T026 [P] [US3] Add automated test coverage for the story and capture the
   failing expectation first
-- [ ] T026 [P] [US3] Add integration coverage for the user journey when the
+- [ ] T027 [P] [US3] Add integration coverage for the user journey when the
   story crosses boundaries
 
 ### Implementation for User Story 3
 
-- [ ] T027 [P] [US3] Create or update entities required by the story
-- [ ] T028 [US3] Implement service logic for the story
-- [ ] T029 [US3] Implement repository or persistence boundary changes required by
+- [ ] T028 [P] [US3] Create or update entities required by the story
+- [ ] T029 [US3] Implement service logic for the story
+- [ ] T030 [US3] Implement repository or persistence boundary changes required by
   the story
-- [ ] T030 [US3] Implement route or UI integration with preserved architecture
+- [ ] T031 [US3] Implement route or UI integration with preserved architecture
 
 **Checkpoint**: All user stories are independently functional.
 
@@ -152,7 +155,7 @@ be implemented
 - [ ] TXXX [P] Additional automated tests for edge cases and regressions
 - [ ] TXXX Security hardening
 - [ ] TXXX Accessibility validation for UI changes
-- [ ] TXXX Run quickstart.md validation
+- [ ] TXXX Validate `quickstart.md` in `zh-TW`
 
 ---
 
@@ -186,3 +189,4 @@ be implemented
 - Keep business logic out of route handlers and models
 - Do not log PII or hardcode secrets
 - Each user story should be independently completable and testable
+- Generated Markdown planning artifacts must remain in `zh-TW`

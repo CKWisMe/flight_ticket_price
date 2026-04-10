@@ -1,21 +1,21 @@
-# Implementation Plan: [FEATURE]
+# 實作計畫：[FEATURE]
 
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Input**: 來自 `/specs/[###-feature-name]/spec.md` 的功能規格
 
-**Note**: This template is filled in by the `/speckit.plan` command. See
-`.specify/templates/plan-template.md` for the execution workflow.
+**Note**: 此模板由 `/speckit.plan` 指令填入。產出的 Markdown 內容必須以
+`zh-TW` 撰寫；程式碼、命令、協定欄位與無法精確翻譯的專有名詞可保留英文。
+執行流程請參考 `.specify/templates/plan-template.md`。
 
-## Summary
+## 摘要
 
-[Extract from feature spec: primary requirement + technical approach from research]
+[從功能規格擷取：主要需求 + research 中採用的技術做法]
 
-## Technical Context
+## 技術背景
 
 <!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
+  ACTION REQUIRED: 將本區內容替換為此專案的實際技術資訊。
+  這個結構是用來引導規劃流程的建議骨架。
 -->
 
 **Language/Version**: [e.g., Ruby 4.0.1 or NEEDS CLARIFICATION]
@@ -30,7 +30,7 @@
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+*Gate: 必須在 Phase 0 research 前通過，並於 Phase 1 design 後再次確認。*
 
 - Simplicity: Explain the simplest viable design and list any required
   complexity exceptions.
@@ -48,10 +48,12 @@
   p95 < 200 ms target for API-facing work.
 - Dependencies: Justify each new dependency and confirm current maintenance
   status.
+- Documentation Language: Confirm this plan and all downstream Markdown
+  artifacts are authored in `zh-TW`.
 
-## Project Structure
+## 專案結構
 
-### Documentation (this feature)
+### 文件（此功能）
 
 ```text
 specs/[###-feature]/
@@ -63,11 +65,11 @@ specs/[###-feature]/
 `-- tasks.md
 ```
 
-### Source Code (repository root)
+### 原始碼（repository root）
 <!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths. The delivered plan must not include Option labels.
+  ACTION REQUIRED: 將下方佔位結構替換為此功能的實際目錄。
+  刪除未使用的選項，並展開為真實路徑。
+  最終輸出的 plan 不可保留 Option 標籤。
 -->
 
 ```text
@@ -94,12 +96,11 @@ backend/
 frontend/
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: [記錄選定的結構，並引用上方列出的實際目錄]
 
 ## Complexity Tracking
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
+> **僅在 Constitution Check 有違規且必須正當化時填寫**
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|

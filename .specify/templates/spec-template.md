@@ -1,11 +1,15 @@
-# Feature Specification: [FEATURE NAME]
+# 功能規格：[FEATURE NAME]
 
 **Feature Branch**: `[###-feature-name]`
 **Created**: [DATE]
 **Status**: Draft
-**Input**: User description: "$ARGUMENTS"
+**Input**: 使用者描述：「$ARGUMENTS」
 
-## User Scenarios & Testing *(mandatory)*
+> 本文件與同功能下的 `plan.md`、`tasks.md`、`research.md`、`data-model.md`、
+> `quickstart.md` 等 Markdown 產物，敘述文字皆必須以 `zh-TW` 撰寫；
+> 程式碼、命令、協定欄位與必要專有名詞可保留英文。
+
+## 使用者情境與測試 *(mandatory)*
 
 <!--
   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
@@ -65,14 +69,14 @@
 
 [Add more user stories as needed, each with an assigned priority]
 
-### Edge Cases
+### 邊界情況
 
 - What happens when [boundary condition]?
 - How does system handle [error scenario]?
 
-## Requirements *(mandatory)*
+## 需求 *(mandatory)*
 
-### Functional Requirements
+### 功能需求
 
 - **FR-001**: System MUST [specific capability]
 - **FR-002**: System MUST [specific capability]
@@ -89,22 +93,25 @@
   and external resource access.
 - **FR-010**: UI-facing work MUST define accessibility expectations sufficient to
   verify WCAG 2.1 AA compliance.
+- **FR-011**: System MUST produce all generated Markdown planning and
+  specification artifacts in `zh-TW`, except where English is required for
+  code, commands, protocol fields, or necessary proper nouns.
 
-*Example of marking unclear requirements:*
+*不明需求的標示範例：*
 
-- **FR-011**: System MUST authenticate users via [NEEDS CLARIFICATION: auth
+- **FR-012**: System MUST authenticate users via [NEEDS CLARIFICATION: auth
   method not specified - email/password, SSO, OAuth?]
-- **FR-012**: System MUST retain user data for [NEEDS CLARIFICATION: retention
+- **FR-013**: System MUST retain user data for [NEEDS CLARIFICATION: retention
   period not specified]
 
-### Key Entities *(include if feature involves data)*
+### 關鍵實體 *(若功能涉及資料則必填)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
 - **[Entity 2]**: [What it represents, relationships to other entities]
 
-## Success Criteria *(mandatory)*
+## 成功準則 *(mandatory)*
 
-### Measurable Outcomes
+### 可衡量結果
 
 - **SC-001**: [Measurable metric]
 - **SC-002**: [Measurable metric]
@@ -112,7 +119,7 @@
 - **SC-004**: [Business metric]
 - **SC-005**: [Performance metric, e.g., API p95 latency remains below 200 ms]
 
-## Constitutional Alignment *(mandatory)*
+## 憲章一致性 *(mandatory)*
 
 - **Simplicity**: [Why this design is the simplest viable approach]
 - **Reuse**: [Existing code reviewed and reused before adding new logic]
@@ -121,8 +128,9 @@
 - **Security/Privacy**: [PII handling, secret management, identity assumptions]
 - **Accessibility**: [Required only when UI is affected; otherwise state N/A]
 - **Dependencies**: [New dependencies or explicit statement that none are added]
+- **Documentation Language**: [說明本功能相關 Markdown 產物如何維持 `zh-TW`]
 
-## Assumptions
+## 假設
 
 - [Assumption about target users]
 - [Assumption about scope boundaries]
