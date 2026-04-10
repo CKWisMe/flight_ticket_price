@@ -1,24 +1,26 @@
-# README
+# Flight Ticket Price
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 8.1.3 application running on Ruby 4.0.1.
 
-Things you may want to cover:
+## Constitution Highlights
 
-* Ruby version
+- Keep implementations simple and prefer reuse over new abstractions.
+- Preserve `Route -> Service -> Repository` boundaries for business logic.
+- Add automated tests for every feature and logic change, ideally starting from a
+  failing test.
+- Do not log PII or hardcode secrets.
 
-* System dependencies
+## Local Setup
 
-* Configuration
+- Install Ruby 4.0.1
+- Run `bundle install`
+- Run `bin/rails db:prepare`
 
-* Database creation
+## Test Suite
 
-* Database initialization
+- Run `bin/rails test`
 
-* How to run the test suite
+## Current Storage
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- The repository currently uses SQLite through Rails-managed configuration in
+  `config/database.yml`.
