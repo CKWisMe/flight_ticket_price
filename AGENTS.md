@@ -9,14 +9,19 @@ Auto-generated from all feature plans. Last updated: 2026-04-11
 ## Project Structure
 
 ```text
-backend/
-frontend/
-tests/
+app/
+config/
+db/
+specs/
+test/
 ```
 
 ## Commands
 
-# Add commands for Ruby 4.0.1
+- `ruby bin/rails db:prepare`
+- `ruby bin/rails test`
+- `ruby bin/rails test:system`
+- `ruby bin/rails server`
 
 ## Code Style
 
@@ -32,4 +37,6 @@ Ruby 4.0.1: Follow standard conventions
 - 001-flight-fare-search: Added Ruby 4.0.1 + Rails 8.1.3、Hotwire (`turbo-rails`, `stimulus-rails`)、Jbuilder、Puma、SQLite3
 
 <!-- MANUAL ADDITIONS START -->
+- Keep flight fare search business logic inside `app/services/` and persistence access inside `app/repositories/`.
+- Put JSON contracts for the feature under `specs/001-flight-fare-search/contracts/` and keep controller/Jbuilder output aligned.
 <!-- MANUAL ADDITIONS END -->

@@ -248,6 +248,12 @@ components:
           type: array
           items:
             type: object
+        priceDisclosure:
+          type: string
+        seatAvailabilityDisclosure:
+          type: string
+        exchangeRateDisclosure:
+          type: string
     Recommendation:
       type: object
       required: [offerId, reasonCode, explanation]

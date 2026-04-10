@@ -1,10 +1,255 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+:root {
+  --bg: #f5efe6;
+  --surface: #fffaf2;
+  --surface-strong: #fff;
+  --text: #1f1c18;
+  --muted: #685f56;
+  --accent: #c44b22;
+  --accent-dark: #8c2f10;
+  --border: #dfd2c3;
+  --success: #236b41;
+  --warning: #9c5b00;
+  --error: #9d2f2f;
+  --shadow: 0 18px 45px rgba(77, 47, 20, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(196, 75, 34, 0.12), transparent 25%),
+    linear-gradient(180deg, #f3eadf 0%, #f8f2ea 100%);
+}
+
+a {
+  color: inherit;
+}
+
+.page-shell {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.panel,
+.hero-card,
+.offer-card,
+.recommendation-card,
+.status-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.hero-card,
+.panel {
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #fff8f0 0%, #fbe6d4 100%);
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  color: var(--accent-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1, h2, h3, p {
+  margin-top: 0;
+}
+
+.hero-copy,
+.muted,
+.validation-message,
+.disclosure-list {
+  color: var(--muted);
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search-form,
+.sort-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-grid,
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-strong);
+  color: var(--text);
+}
+
+.checkbox-field {
+  align-items: end;
+}
+
+.actions,
+.offer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.primary-button,
+.secondary-button,
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.primary-button,
+button,
+input[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+}
+
+.secondary-button {
+  background: transparent;
+  border-color: var(--border);
+}
+
+.status-list,
+.offer-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.status-card,
+.offer-card,
+.recommendation-card {
+  padding: 1rem 1.2rem;
+}
+
+.offer-card-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  display: inline-flex;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: #eee4d8;
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+.status-success {
+  background: rgba(35, 107, 65, 0.12);
+  color: var(--success);
+}
+
+.status-error {
+  background: rgba(157, 47, 47, 0.12);
+  color: var(--error);
+}
+
+.status-progress {
+  background: rgba(156, 91, 0, 0.12);
+  color: var(--warning);
+}
+
+.disclosure-list {
+  padding-left: 1.2rem;
+}
+
+.empty-state {
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 18px;
+}
+
+.legs-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.leg-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.flash {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 1rem auto 0;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .page-shell {
+    width: min(100% - 1rem, 100%);
+    padding-top: 1rem;
+  }
+
+  .form-grid,
+  .summary-grid,
+  .leg-row,
+  .offer-card-header,
+  .section-heading {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .offer-meta,
+  .actions {
+    flex-direction: column;
+  }
+}

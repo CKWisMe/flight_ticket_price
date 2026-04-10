@@ -1,0 +1,57 @@
+<div class="page-shell" data-controller="search-status" data-search-status-url-value="<%= search_request_results_path(@search_request, format: :json) %>">
+  <section class="panel">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Search Request</p>
+        <h1>搜尋狀態</h1>
+      </div>
+      <span class="<%= source_status_badge_class(@search_request.status) %>" data-search-status-target="requestStatus">
+        <%= @search_request.status %>
+      </span>
+    </div>
+
+    <dl class="summary-grid">
+      <div>
+        <dt>航程型態</dt>
+        <dd><%= @search_request.trip_type %></dd>
+      </div>
+      <div>
+        <dt>日期區間</dt>
+        <dd><%= @search_request.departure_window_start_on %> 至 <%= @search_request.departure_window_end_on %></dd>
+      </div>
+      <div>
+        <dt>旅遊天數</dt>
+        <dd><%= @search_request.stay_length_days %> 天</dd>
+      </div>
+      <div>
+        <dt>顯示幣別</dt>
+        <dd><%= @search_request.display_currency %></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="panel">
+    <div class="section-heading">
+      <h2>來源狀態</h2>
+      <p class="muted">系統會逐步更新各來源進度。</p>
+    </div>
+    <div class="status-list" data-search-status-target="statuses">
+      <% @search_request.source_statuses.each do |status| %>
+        <div class="status-card">
+          <strong><%= status.source_key %></strong>
+          <span class="<%= source_status_badge_class(status.status) %>"><%= status.status %></span>
+          <% if status.error_message.present? %>
+            <p><%= status.error_message %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="section-heading">
+      <h2>結果頁</h2>
+      <%= link_to "查看結果", search_request_results_path(@search_request), class: "primary-button" %>
+    </div>
+  </section>
+</div>

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  root "search_requests#new"
+
+  resources :search_requests, only: [ :new, :create, :show ], path: "search_requests" do
+    resource :results, only: [ :show ], controller: "search_results"
+  end
 end

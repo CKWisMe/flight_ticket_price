@@ -4,12 +4,12 @@
 
 1. 安裝 Ruby 4.0.1。
 2. 執行 `bundle install`。
-3. 執行 `bin/rails db:prepare`。
+3. 執行 `ruby bin/rails db:prepare`。
 
 ## 2. 啟動應用
 
 1. 設定外部售票來源與匯率來源所需的 environment variables。
-2. 啟動 Rails server：`bin/rails server`。
+2. 啟動 Rails server：`ruby bin/rails server`。
 3. 於另一個終端啟動背景工作處理程序；若沿用 Rails 預設 queue adapter，需確認 job worker 可執行。
 
 ## 3. 核心驗證流程
@@ -29,8 +29,8 @@
 
 ## 4. 測試
 
-- 執行全部測試：`bin/rails test`
-- 執行 system tests：`bin/rails test:system`
+- 執行全部測試：`ruby bin/rails test`
+- 執行 system tests：`ruby bin/rails test:system`
 
 ## 5. 驗收重點
 

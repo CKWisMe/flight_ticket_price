@@ -1,0 +1,22 @@
+require "test_helper"
+
+class SearchRequests::CreateServiceTest < ActiveSupport::TestCase
+  test "creates search request and enqueues ticket search job" do
+    assert_enqueued_with(job: TicketSearchJob) do
+      result = SearchRequests::CreateService.call(params: {
+        trip_type: "round_trip",
+        origin_airport_code: "TPE",
+        destination_airport_code: "NRT",
+        direct_only: false,
+        departure_window_start_on: Date.current + 7.days,
+        departure_window_end_on: Date.current + 14.days,
+        stay_length_days: 4,
+        display_currency: "TWD",
+        itinerary_legs: []
+      })
+
+      assert result.success?
+      assert_equal "queued", result.search_request.status
+    end
+  end
+end
