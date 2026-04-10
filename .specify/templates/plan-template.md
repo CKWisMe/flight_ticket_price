@@ -49,7 +49,8 @@
 - Dependencies: Justify each new dependency and confirm current maintenance
   status.
 - Documentation Language: Confirm this plan and all downstream Markdown
-  artifacts are authored in `zh-TW`.
+  artifacts, analysis reports, and remediation summaries are authored in
+  `zh-TW`.
 
 ## 專案結構
 

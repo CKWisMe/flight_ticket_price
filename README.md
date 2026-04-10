@@ -9,9 +9,9 @@ Rails 8.1.3 application running on Ruby 4.0.1.
 - Add automated tests for every feature and logic change, ideally starting from a
   failing test.
 - Do not log PII or hardcode secrets.
-- Generated planning/specification Markdown files under `specs/` must use
-  `zh-TW`, except where English is required for code, commands, protocol fields,
-  or proper nouns.
+- Generated planning/specification Markdown files under `specs/` and Spec Kit
+  analysis outputs must use `zh-TW`, except where English is required for code,
+  commands, protocol fields, or proper nouns.
 
 ## Local Setup
 

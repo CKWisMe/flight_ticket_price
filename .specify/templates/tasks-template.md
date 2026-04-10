@@ -43,7 +43,7 @@ MUST 包含足以證明行為的測試工作。
 - [ ] T004 [P] Review existing services, repositories, helpers, and utilities to
   prevent duplicate logic
 - [ ] T005 [P] Confirm generated Markdown deliverables for this feature are
-  authored in `zh-TW`
+  authored in `zh-TW`, including analysis findings and remediation summaries
 
 ---
 
@@ -190,3 +190,4 @@ MUST 包含足以證明行為的測試工作。
 - Do not log PII or hardcode secrets
 - Each user story should be independently completable and testable
 - Generated Markdown planning artifacts must remain in `zh-TW`
+- Analysis findings and remediation summaries must remain in `zh-TW`

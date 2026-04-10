@@ -1,10 +1,10 @@
 <!--
 Sync Impact Report
-- Version change: 1.2.0 -> 1.3.0
+- Version change: 1.3.0 -> 1.4.0
 - Modified principles:
-  - None
+  - VI. zh-TW Documentation Standard -> VI. zh-TW Documentation and Analysis Standard
 - Added sections:
-  - VI. zh-TW Documentation Standard
+  - None
 - Removed sections:
   - None
 - Templates requiring updates:
@@ -12,6 +12,7 @@ Sync Impact Report
   - updated: .specify/templates/spec-template.md
   - updated: .specify/templates/tasks-template.md
   - updated: README.md
+  - updated: AGENTS.md
   - pending: .specify/templates/commands/*.md (directory not present in this repo)
 - Follow-up TODOs:
   - None
@@ -65,13 +66,14 @@ accessibility requirements.
 Rationale: Security and accessibility are release criteria, not optional
 hardening work.
 
-### VI. zh-TW Documentation Standard
-All generated specification artifacts MUST be written in Traditional Chinese for
-Taiwan (`zh-TW`). This requirement applies to `spec.md`, `plan.md`,
-`tasks.md`, `research.md`, `data-model.md`, `quickstart.md`, and equivalent
-Markdown artifacts produced by Spec Kit workflows. English MAY appear only for
-code, commands, protocol fields, or external proper nouns that would lose
-precision if translated.
+### VI. zh-TW Documentation and Analysis Standard
+All generated specification artifacts and analysis outputs MUST be written in
+Traditional Chinese for Taiwan (`zh-TW`). This requirement applies to
+`spec.md`, `plan.md`, `tasks.md`, `research.md`, `data-model.md`,
+`quickstart.md`, `/speckit.analyze` reports, remediation suggestions, and
+equivalent Markdown or chat-form workflow outputs produced by Spec Kit.
+English MAY appear only for code, commands, protocol fields, or external proper
+nouns that would lose precision if translated.
 
 Rationale: A single mandated document language prevents mixed-language project
 artifacts and keeps planning, review, and delivery communication consistent.
@@ -89,9 +91,10 @@ artifacts and keeps planning, review, and delivery communication consistent.
 - New dependencies MAY be introduced only when they are actively maintained and
   updated within the last 6 months at the time of adoption, and the adoption
   rationale MUST be recorded in the plan.
-- Generated Markdown deliverables under `specs/` MUST remain in `zh-TW`,
-  including headings, narrative text, acceptance scenarios, and task
-  descriptions.
+- Generated Markdown deliverables under `specs/` and Spec Kit analysis outputs
+  MUST remain in `zh-TW`, including headings, narrative text, acceptance
+  scenarios, task descriptions, findings, recommendations, and remediation
+  guidance.
 
 ## Quality and Delivery Standards
 
@@ -103,8 +106,8 @@ artifacts and keeps planning, review, and delivery communication consistent.
 - Feature plans, specs, and tasks MUST explicitly cover architecture
   boundaries, required tests, performance constraints, security/privacy impact,
   and accessibility impact when UI is affected.
-- Reviews for generated Markdown artifacts MUST reject mixed-language prose when
-  the content is expected to be authored in `zh-TW`.
+- Reviews for generated Markdown artifacts and analysis reports MUST reject
+  mixed-language prose when the content is expected to be authored in `zh-TW`.
 - Compliance with this constitution MUST be reviewed on every pull request, and
   `/speckit.analyze` SHOULD be run to detect cross-artifact violations before
   merge.
@@ -123,4 +126,4 @@ constitutional compliance, including testing obligations, architecture
 boundaries, privacy/security rules, dependency due diligence, and `zh-TW`
 artifact requirements.
 
-**Version**: 1.3.0 | **Ratified**: 2026-04-11 | **Last Amended**: 2026-04-11
+**Version**: 1.4.0 | **Ratified**: 2026-04-11 | **Last Amended**: 2026-04-11
