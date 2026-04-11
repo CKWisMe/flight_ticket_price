@@ -21,7 +21,7 @@ export default class extends Controller {
 
   addLeg() {
     if (this.legsListTarget.children.length >= 4) {
-      this.validationTarget.textContent = "多點進出最多只能新增 4 段航程。"
+      this.validationTarget.textContent = "Multi-city trips support up to 4 legs."
       return
     }
 
@@ -40,7 +40,7 @@ export default class extends Controller {
 
     const legs = this.legsListTarget.querySelectorAll(".leg-row")
     if (legs.length < 2) {
-      this.validationTarget.textContent = "多點進出至少需要 2 段航程。"
+      this.validationTarget.textContent = "Multi-city trips require at least 2 legs."
       return
     }
 

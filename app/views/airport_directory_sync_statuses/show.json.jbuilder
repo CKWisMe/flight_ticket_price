@@ -1,0 +1,10 @@
+json.sourceKey @sync_run.source_key
+json.status @sync_run.status
+json.startedAt @sync_run.started_at.iso8601
+json.completedAt @sync_run.completed_at&.iso8601
+json.sourceSnapshotVersion @sync_run.source_snapshot_version
+json.fetchedRecordCount @sync_run.fetched_record_count
+json.upsertedRecordCount @sync_run.upserted_record_count
+json.deactivatedRecordCount @sync_run.deactivated_record_count
+json.failedRecordCount @sync_run.failed_record_count
+json.errorSummary @sync_run.error_summary

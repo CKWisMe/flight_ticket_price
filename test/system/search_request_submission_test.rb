@@ -1,18 +1,26 @@
 require "application_system_test_case"
 
 class SearchRequestSubmissionTest < ApplicationSystemTestCase
+  setup do
+    create_airport(iata_code: "TPE", icao_code: "RCTP")
+    create_airport(source_identifier: "nrt", iata_code: "NRT", icao_code: "RJAA", official_name_en: "Narita International Airport", localized_name_zh: "成田國際機場", city_name: "東京", country_name: "日本", country_code: "JP")
+  end
+
   test "user submits a search request and sees status page" do
     visit root_path
 
-    select "來回", from: "航程型態"
-    fill_in "起飛機場", with: "TPE"
-    fill_in "目的地機場", with: "NRT"
-    fill_in "旅遊天數", with: 4
-    select "TWD", from: "顯示幣別"
-    click_button "開始搜尋"
+    select "Round Trip", from: "Trip Type"
+    fill_in "Origin Airport", with: "TPE"
+    find("input[name='search_request[origin_airport_code]']", visible: false).set("TPE")
+    fill_in "Destination Airport", with: "NRT"
+    find("input[name='search_request[destination_airport_code]']", visible: false).set("NRT")
+    fill_in "Trip Length (days)", with: 4
+    select "TWD", from: "Display Currency"
 
-    assert_text "搜尋已建立"
-    assert_text "搜尋狀態"
-    assert_text "來源狀態"
+    click_button "Search Fares"
+
+    assert_text "Search request submitted. Pricing results are being prepared."
+    assert_text "Request Status"
+    assert_text "completed"
   end
 end

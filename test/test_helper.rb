@@ -1,11 +1,13 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+require_relative "support/airport_directory_test_helper"
 ActiveJob::Base.queue_adapter = :test
 
 module ActiveSupport
   class TestCase
     include ActiveJob::TestHelper
+    include AirportDirectoryTestHelper
 
     # Run tests in parallel with specified workers
     parallelize(workers: 1)
@@ -19,4 +21,5 @@ end
 
 class ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
+  include AirportDirectoryTestHelper
 end

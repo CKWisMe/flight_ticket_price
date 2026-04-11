@@ -3,7 +3,7 @@
     <div class="section-heading">
       <div>
         <p class="eyebrow">Search Request</p>
-        <h1>搜尋狀態</h1>
+        <h1>Request Status</h1>
       </div>
       <span class="<%= source_status_badge_class(@search_request.status) %>" data-search-status-target="requestStatus">
         <%= @search_request.status %>
@@ -12,19 +12,19 @@
 
     <dl class="summary-grid">
       <div>
-        <dt>航程型態</dt>
+        <dt>Trip Type</dt>
         <dd><%= @search_request.trip_type %></dd>
       </div>
       <div>
-        <dt>日期區間</dt>
-        <dd><%= @search_request.departure_window_start_on %> 至 <%= @search_request.departure_window_end_on %></dd>
+        <dt>Departure Window</dt>
+        <dd><%= @search_request.departure_window_start_on %> to <%= @search_request.departure_window_end_on %></dd>
       </div>
       <div>
-        <dt>旅遊天數</dt>
-        <dd><%= @search_request.stay_length_days %> 天</dd>
+        <dt>Trip Length</dt>
+        <dd><%= @search_request.stay_length_days %> days</dd>
       </div>
       <div>
-        <dt>顯示幣別</dt>
+        <dt>Currency</dt>
         <dd><%= @search_request.display_currency %></dd>
       </div>
     </dl>
@@ -32,8 +32,8 @@
 
   <section class="panel">
     <div class="section-heading">
-      <h2>來源狀態</h2>
-      <p class="muted">系統會逐步更新各來源進度。</p>
+      <h2>Source Statuses</h2>
+      <p class="muted">Each fare source updates independently while the search remains in progress.</p>
     </div>
     <div class="status-list" data-search-status-target="statuses">
       <% @search_request.source_statuses.each do |status| %>
@@ -50,8 +50,8 @@
 
   <section class="panel">
     <div class="section-heading">
-      <h2>結果頁</h2>
-      <%= link_to "查看結果", search_request_results_path(@search_request), class: "primary-button" %>
+      <h2>Results</h2>
+      <%= link_to "View Results", search_request_results_path(@search_request), class: "primary-button" %>
     </div>
   </section>
 </div>

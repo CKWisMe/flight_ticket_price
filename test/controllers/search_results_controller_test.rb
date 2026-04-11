@@ -1,6 +1,11 @@
 require "test_helper"
 
 class SearchResultsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    create_airport(iata_code: "TPE", icao_code: "RCTP")
+    create_airport(source_identifier: "test:nrt", iata_code: "NRT", icao_code: "RJAA", official_name_en: "Narita International Airport", localized_name_zh: "成田國際機場", city_name: "東京", country_name: "日本", country_code: "JP")
+  end
+
   test "returns sorted results with disclosures and booking url" do
     search_request = nil
 

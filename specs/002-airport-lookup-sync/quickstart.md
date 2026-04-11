@@ -31,6 +31,11 @@ ruby bin/rails runner "AirportDirectorySyncJob.perform_now"
 ruby bin/rails runner "AirportDirectorySyncJob.perform_now"
 ```
 
+相關設定已寫入 `config/deploy.yml`：
+
+- `AIRPORT_DIRECTORY_SYNC_SCHEDULE: "0 1 * * 1"`
+- `airport_sync` alias 會執行 `AirportDirectorySyncJob.perform_now`
+
 驗證要點：
 
 - scheduler 指向正式環境的應用程式與正確 working directory
@@ -46,13 +51,19 @@ ruby bin/rails server
 開啟首頁後，在「起飛機場」或「目的地機場」欄位輸入：
 
 - `TPE`
-- `桃園`
+- `台灣桃園`
 - `東京`
 
-預期結果：
+US1 驗證要點：
 
 - 欄位下方顯示候選機場
+- 選定候選後會保留機場代號 hidden value
+- lookup API 多次請求的 p95 應低於 200 ms
+
+US2 驗證要點：
+
 - 多機場城市必須要求明確選定一座機場
+- 候選列表顯示 `displayName`、城市與國家資訊
 - 無匹配時顯示清楚提示
 
 ## 4. 驗證 JSON 契約

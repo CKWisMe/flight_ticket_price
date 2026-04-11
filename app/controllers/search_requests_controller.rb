@@ -15,7 +15,7 @@ class SearchRequestsController < ApplicationController
 
     respond_to do |format|
       if result.success?
-        format.html { redirect_to search_request_path(result.search_request), notice: "搜尋已建立，正在彙整來源結果。" }
+        format.html { redirect_to search_request_path(result.search_request), notice: "Search request submitted. Pricing results are being prepared." }
         format.json do
           @search_request = result.search_request
           render :create, status: :accepted
@@ -23,7 +23,7 @@ class SearchRequestsController < ApplicationController
       else
         format.html do
           @search_request = result.search_request || SearchRequest.new
-          flash.now[:alert] = "請修正搜尋條件後再試一次"
+          flash.now[:alert] = "Please review the airport and date fields before submitting."
           render :new, status: :unprocessable_entity
         end
         format.json { render json: { errors: result.errors }, status: :unprocessable_entity }

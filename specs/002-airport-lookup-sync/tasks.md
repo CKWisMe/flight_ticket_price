@@ -17,10 +17,10 @@
 
 **目的**: 建立任務所需的設定檔與共用骨架
 
-- [ ] T001 建立機場名錄來源設定檔 `config/airport_directory_sources.yml`
-- [ ] T002 [P] 盤點既有 `config/routes.rb` 與搜尋流程，確認同步狀態 endpoint 命名與 URL 慣例可沿用現有路由風格
-- [ ] T003 [P] 建立機場查找與同步相關測試目錄骨架於 `test/controllers/.keep`, `test/jobs/.keep`, `test/models/.keep`, `test/repositories/.keep`, `test/services/.keep`, `test/system/.keep`
-- [ ] T004 [P] 確認本功能規劃文件維持 `zh-TW` 並對齊 `specs/002-airport-lookup-sync/plan.md`, `specs/002-airport-lookup-sync/research.md`, `specs/002-airport-lookup-sync/data-model.md`, `specs/002-airport-lookup-sync/quickstart.md`
+- [X] T001 建立機場名錄來源設定檔 `config/airport_directory_sources.yml`
+- [X] T002 [P] 盤點既有 `config/routes.rb` 與搜尋流程，確認同步狀態 endpoint 命名與 URL 慣例可沿用現有路由風格
+- [X] T003 [P] 建立機場查找與同步相關測試目錄骨架於 `test/controllers/.keep`, `test/jobs/.keep`, `test/models/.keep`, `test/repositories/.keep`, `test/services/.keep`, `test/system/.keep`
+- [X] T004 [P] 確認本功能規劃文件維持 `zh-TW` 並對齊 `specs/002-airport-lookup-sync/plan.md`, `specs/002-airport-lookup-sync/research.md`, `specs/002-airport-lookup-sync/data-model.md`, `specs/002-airport-lookup-sync/quickstart.md`
 
 ---
 
@@ -28,13 +28,13 @@
 
 **目的**: 在任何使用者故事開始前都必須完成的核心基礎建設
 
-- [ ] T005 建立機場名錄 migration 於 `db/migrate/*_create_airports.rb` 與同步紀錄 migration 於 `db/migrate/*_create_airport_directory_sync_runs.rb`
-- [ ] T006 [P] 建立 `Airport` 與 `AirportDirectorySyncRun` model 於 `app/models/airport.rb`, `app/models/airport_directory_sync_run.rb`
-- [ ] T007 [P] 建立資料存取邊界於 `app/repositories/airport_repository.rb`, `app/repositories/airport_directory_sync_run_repository.rb`
-- [ ] T008 [P] 建立同步來源 registry 與 base adapter 於 `app/services/airport_directory_sources/registry.rb`, `app/services/airport_directory_sources/base_adapter.rb`, `app/services/airport_directory_sources/config_adapter.rb`
-- [ ] T009 建立共用正規化與比對工具於 `app/services/airports/normalize_query_service.rb`
-- [ ] T010 建立同步工作入口於 `app/jobs/airport_directory_sync_job.rb`
-- [ ] T011 執行 schema 更新並確認資料表結構反映於 `db/schema.rb`
+- [X] T005 建立機場名錄 migration 於 `db/migrate/*_create_airports.rb` 與同步紀錄 migration 於 `db/migrate/*_create_airport_directory_sync_runs.rb`
+- [X] T006 [P] 建立 `Airport` 與 `AirportDirectorySyncRun` model 於 `app/models/airport.rb`, `app/models/airport_directory_sync_run.rb`
+- [X] T007 [P] 建立資料存取邊界於 `app/repositories/airport_repository.rb`, `app/repositories/airport_directory_sync_run_repository.rb`
+- [X] T008 [P] 建立同步來源 registry 與 base adapter 於 `app/services/airport_directory_sources/registry.rb`, `app/services/airport_directory_sources/base_adapter.rb`, `app/services/airport_directory_sources/config_adapter.rb`
+- [X] T009 建立共用正規化與比對工具於 `app/services/airports/normalize_query_service.rb`
+- [X] T010 建立同步工作入口於 `app/jobs/airport_directory_sync_job.rb`
+- [X] T011 執行 schema 更新並確認資料表結構反映於 `db/schema.rb`
 
 **檢查點**: 基礎建設完成，使用者故事可開始實作。
 
@@ -50,25 +50,25 @@
 
 > **注意**: 先寫這些測試，並確認它們在實作前會失敗
 
-- [ ] T012 [P] [US1] 新增 `Airport` model 驗證與正規化測試於 `test/models/airport_test.rb`
-- [ ] T013 [P] [US1] 新增查找 repository 測試於 `test/repositories/airport_repository_test.rb`
-- [ ] T014 [P] [US1] 新增查找 service 測試於 `test/services/airports/lookup_service_test.rb`
-- [ ] T015 [P] [US1] 新增查找 controller 與 JSON 契約測試於 `test/controllers/airports_controller_test.rb`
-- [ ] T016 [P] [US1] 新增搜尋頁自動完成 system test 於 `test/system/airport_lookup_autocomplete_test.rb`
-- [ ] T017 [P] [US1] 新增查找延遲與 lookup API p95 驗證 integration test 於 `test/integration/airport_lookup_performance_test.rb`
+- [X] T012 [P] [US1] 新增 `Airport` model 驗證與正規化測試於 `test/models/airport_test.rb`
+- [X] T013 [P] [US1] 新增查找 repository 測試於 `test/repositories/airport_repository_test.rb`
+- [X] T014 [P] [US1] 新增查找 service 測試於 `test/services/airports/lookup_service_test.rb`
+- [X] T015 [P] [US1] 新增查找 controller 與 JSON 契約測試於 `test/controllers/airports_controller_test.rb`
+- [X] T016 [P] [US1] 新增搜尋頁自動完成 system test 於 `test/system/airport_lookup_autocomplete_test.rb`
+- [X] T017 [P] [US1] 新增查找延遲與 lookup API p95 驗證 integration test 於 `test/integration/airport_lookup_performance_test.rb`
 
 ### 使用者故事 1 的實作
 
-- [ ] T018 [P] [US1] 建立查找 service 於 `app/services/airports/lookup_service.rb`
-- [ ] T019 [US1] 在 `app/repositories/airport_repository.rb` 實作 active 名錄 prefix query、match type 判定與排序規則
-- [ ] T020 [P] [US1] 更新 `config/routes.rb` 加入 `airports/lookup` 路由
-- [ ] T021 [US1] 建立查找 endpoint 於 `app/controllers/airports_controller.rb`
-- [ ] T022 [US1] 建立查找 JSON 輸出於 `app/views/airports/lookup.json.jbuilder`
-- [ ] T023 [P] [US1] 建立前端自動完成 controller 於 `app/javascript/controllers/airport_lookup_controller.js` 並在 `app/javascript/controllers/index.js` 註冊
-- [ ] T024 [US1] 將查找互動接入搜尋表單於 `app/views/search_requests/new.html.erb`
-- [ ] T025 [US1] 補強查找欄位的可近用與錯誤提示樣式於 `app/assets/stylesheets/application.css`
-- [ ] T026 [US1] 調整 `app/controllers/search_requests_controller.rb` 與 `app/services/search_requests/create_service.rb` 以只接受最終選定的機場代號且維持既有送出契約
-- [ ] T027 [US1] 在 `specs/002-airport-lookup-sync/quickstart.md` 補充 lookup API p95 < 200 ms 的量測方式與 US1 驗收步驟
+- [X] T018 [P] [US1] 建立查找 service 於 `app/services/airports/lookup_service.rb`
+- [X] T019 [US1] 在 `app/repositories/airport_repository.rb` 實作 active 名錄 prefix query、match type 判定與排序規則
+- [X] T020 [P] [US1] 更新 `config/routes.rb` 加入 `airports/lookup` 路由
+- [X] T021 [US1] 建立查找 endpoint 於 `app/controllers/airports_controller.rb`
+- [X] T022 [US1] 建立查找 JSON 輸出於 `app/views/airports/lookup.json.jbuilder`
+- [X] T023 [P] [US1] 建立前端自動完成 controller 於 `app/javascript/controllers/airport_lookup_controller.js` 並在 `app/javascript/controllers/index.js` 註冊
+- [X] T024 [US1] 將查找互動接入搜尋表單於 `app/views/search_requests/new.html.erb`
+- [X] T025 [US1] 補強查找欄位的可近用與錯誤提示樣式於 `app/assets/stylesheets/application.css`
+- [X] T026 [US1] 調整 `app/controllers/search_requests_controller.rb` 與 `app/services/search_requests/create_service.rb` 以只接受最終選定的機場代號且維持既有送出契約
+- [X] T027 [US1] 在 `specs/002-airport-lookup-sync/quickstart.md` 補充 lookup API p95 < 200 ms 的量測方式與 US1 驗收步驟
 
 **檢查點**: 使用者故事 1 可獨立運作並驗證。
 
@@ -82,17 +82,17 @@
 
 ### 使用者故事 2 的測試
 
-- [ ] T028 [P] [US2] 新增多機場排序與候選辨識測試於 `test/services/airports/lookup_service_test.rb`
-- [ ] T029 [P] [US2] 新增多機場送出阻擋 controller/service 測試於 `test/controllers/search_requests_controller_test.rb` 與 `test/services/search_requests/create_service_test.rb`
-- [ ] T030 [P] [US2] 新增多機場明確選取與鍵盤操作 system test 於 `test/system/airport_lookup_city_disambiguation_test.rb`
+- [X] T028 [P] [US2] 新增多機場排序與候選辨識測試於 `test/services/airports/lookup_service_test.rb`
+- [X] T029 [P] [US2] 新增多機場送出阻擋 controller/service 測試於 `test/controllers/search_requests_controller_test.rb` 與 `test/services/search_requests/create_service_test.rb`
+- [X] T030 [P] [US2] 新增多機場明確選取與鍵盤操作 system test 於 `test/system/airport_lookup_city_disambiguation_test.rb`
 
 ### 使用者故事 2 的實作
 
-- [ ] T031 [US2] 在 `app/services/airports/lookup_service.rb` 與 `app/repositories/airport_repository.rb` 完成城市多候選、輸入含國家或地區字樣時的完全匹配優先，以及名稱匹配度排序
-- [ ] T032 [US2] 在 `app/views/airports/lookup.json.jbuilder` 補齊 `displayName`, `cityName`, `countryName`, `countryCode`, `matchType`, `selectable` 契約欄位
-- [ ] T033 [US2] 在 `app/javascript/controllers/airport_lookup_controller.js` 實作多機場候選清單、鍵盤導覽、重新輸入後清除既有選取與送出前驗證
-- [ ] T034 [US2] 更新 `app/views/search_requests/new.html.erb` 顯示多機場提示、無結果訊息與欄位驗證文字
-- [ ] T035 [US2] 在 `app/assets/stylesheets/application.css` 完成行動版與桌面版候選列表呈現，確保必要辨識資訊不被隱藏
+- [X] T031 [US2] 在 `app/services/airports/lookup_service.rb` 與 `app/repositories/airport_repository.rb` 完成城市多候選、輸入含國家或地區字樣時的完全匹配優先，以及名稱匹配度排序
+- [X] T032 [US2] 在 `app/views/airports/lookup.json.jbuilder` 補齊 `displayName`, `cityName`, `countryName`, `countryCode`, `matchType`, `selectable` 契約欄位
+- [X] T033 [US2] 在 `app/javascript/controllers/airport_lookup_controller.js` 實作多機場候選清單、鍵盤導覽、重新輸入後清除既有選取與送出前驗證
+- [X] T034 [US2] 更新 `app/views/search_requests/new.html.erb` 顯示多機場提示、無結果訊息與欄位驗證文字
+- [X] T035 [US2] 在 `app/assets/stylesheets/application.css` 完成行動版與桌面版候選列表呈現，確保必要辨識資訊不被隱藏
 
 **檢查點**: 使用者故事 1 與 2 都可獨立運作。
 
@@ -106,26 +106,26 @@
 
 ### 使用者故事 3 的測試
 
-- [ ] T036 [P] [US3] 新增同步 run model 測試於 `test/models/airport_directory_sync_run_test.rb`
-- [ ] T037 [P] [US3] 新增同步 repository 測試於 `test/repositories/airport_directory_sync_run_repository_test.rb`
-- [ ] T038 [P] [US3] 新增同步 service 成功、部分成功與停用規則測試於 `test/services/airport_directory/sync_service_test.rb`
-- [ ] T039 [P] [US3] 新增同步 job 測試於 `test/jobs/airport_directory_sync_job_test.rb`
-- [ ] T040 [P] [US3] 新增同步狀態 endpoint 測試於 `test/controllers/airport_directory_sync_statuses_controller_test.rb`
-- [ ] T041 [P] [US3] 新增同步後查找可用性 integration test 於 `test/integration/airport_directory_sync_availability_test.rb`
-- [ ] T042 [P] [US3] 新增排程設定驗證測試於 `test/integration/airport_directory_schedule_configuration_test.rb`
+- [X] T036 [P] [US3] 新增同步 run model 測試於 `test/models/airport_directory_sync_run_test.rb`
+- [X] T037 [P] [US3] 新增同步 repository 測試於 `test/repositories/airport_directory_sync_run_repository_test.rb`
+- [X] T038 [P] [US3] 新增同步 service 成功、部分成功與停用規則測試於 `test/services/airport_directory/sync_service_test.rb`
+- [X] T039 [P] [US3] 新增同步 job 測試於 `test/jobs/airport_directory_sync_job_test.rb`
+- [X] T040 [P] [US3] 新增同步狀態 endpoint 測試於 `test/controllers/airport_directory_sync_statuses_controller_test.rb`
+- [X] T041 [P] [US3] 新增同步後查找可用性 integration test 於 `test/integration/airport_directory_sync_availability_test.rb`
+- [X] T042 [P] [US3] 新增排程設定驗證測試於 `test/integration/airport_directory_schedule_configuration_test.rb`
 
 ### 使用者故事 3 的實作
 
-- [ ] T043 [P] [US3] 在 `app/repositories/airport_repository.rb` 實作 upsert、reactivate 與 deactivate-missing 能力
-- [ ] T044 [P] [US3] 在 `app/repositories/airport_directory_sync_run_repository.rb` 實作同步狀態建立與完成更新
-- [ ] T045 [US3] 建立同步主流程於 `app/services/airport_directory/sync_service.rb`
-- [ ] T046 [US3] 在 `app/jobs/airport_directory_sync_job.rb` 串接同步 service 並提供可重入 job 入口
-- [ ] T047 [US3] 在 `app/services/airport_directory_sources/config_adapter.rb` 與 `app/services/airport_directory_sources/registry.rb` 依 `specs/002-airport-lookup-sync/research.md` 的標準化 payload 契約實作來源讀取與資料映射
-- [ ] T048 [US3] 建立同步狀態 endpoint 於 `app/controllers/airport_directory_sync_statuses_controller.rb`
-- [ ] T049 [US3] 建立同步狀態 JSON 輸出於 `app/views/airport_directory_sync_statuses/show.json.jbuilder`
-- [ ] T050 [US3] 更新 `config/routes.rb` 加入 `airport_directory_sync_status` 路由
-- [ ] T051 [US3] 在 `config/deploy.yml` 新增每週一 01:00 執行 `AirportDirectorySyncJob` 的排程設定
-- [ ] T052 [US3] 在 `specs/002-airport-lookup-sync/quickstart.md` 補充固定排程部署 runbook、同步狀態檢查方式與 US3 驗證步驟
+- [X] T043 [P] [US3] 在 `app/repositories/airport_repository.rb` 實作 upsert、reactivate 與 deactivate-missing 能力
+- [X] T044 [P] [US3] 在 `app/repositories/airport_directory_sync_run_repository.rb` 實作同步狀態建立與完成更新
+- [X] T045 [US3] 建立同步主流程於 `app/services/airport_directory/sync_service.rb`
+- [X] T046 [US3] 在 `app/jobs/airport_directory_sync_job.rb` 串接同步 service 並提供可重入 job 入口
+- [X] T047 [US3] 在 `app/services/airport_directory_sources/config_adapter.rb` 與 `app/services/airport_directory_sources/registry.rb` 依 `specs/002-airport-lookup-sync/research.md` 的標準化 payload 契約實作來源讀取與資料映射
+- [X] T048 [US3] 建立同步狀態 endpoint 於 `app/controllers/airport_directory_sync_statuses_controller.rb`
+- [X] T049 [US3] 建立同步狀態 JSON 輸出於 `app/views/airport_directory_sync_statuses/show.json.jbuilder`
+- [X] T050 [US3] 更新 `config/routes.rb` 加入 `airport_directory_sync_status` 路由
+- [X] T051 [US3] 在 `config/deploy.yml` 新增每週一 01:00 執行 `AirportDirectorySyncJob` 的排程設定
+- [X] T052 [US3] 在 `specs/002-airport-lookup-sync/quickstart.md` 補充固定排程部署 runbook、同步狀態檢查方式與 US3 驗證步驟
 
 **檢查點**: 全部使用者故事都可獨立運作。
 
@@ -135,10 +135,10 @@
 
 **目的**: 改善跨多個使用者故事的品質、文件與驗證
 
-- [ ] T053 [P] 以契約實際回應比對 `specs/002-airport-lookup-sync/contracts/airport_lookup_response.schema.json` 與 `specs/002-airport-lookup-sync/contracts/airport_directory_sync_status_response.schema.json`
-- [ ] T054 [P] 依最終整合結果整理 `specs/002-airport-lookup-sync/quickstart.md`，統一 US1-US3 的手動驗證順序與前置條件
-- [ ] T055 執行完整回歸測試並處理失敗案例於 `test/` 與受影響原始碼檔案
-- [ ] T056 進行安全與可近用性收尾檢查於 `app/controllers/airports_controller.rb`, `app/controllers/airport_directory_sync_statuses_controller.rb`, `app/views/search_requests/new.html.erb`, `app/assets/stylesheets/application.css`
+- [X] T053 [P] 以契約實際回應比對 `specs/002-airport-lookup-sync/contracts/airport_lookup_response.schema.json` 與 `specs/002-airport-lookup-sync/contracts/airport_directory_sync_status_response.schema.json`
+- [X] T054 [P] 依最終整合結果整理 `specs/002-airport-lookup-sync/quickstart.md`，統一 US1-US3 的手動驗證順序與前置條件
+- [X] T055 執行完整回歸測試並處理失敗案例於 `test/` 與受影響原始碼檔案
+- [X] T056 進行安全與可近用性收尾檢查於 `app/controllers/airports_controller.rb`, `app/controllers/airport_directory_sync_statuses_controller.rb`, `app/views/search_requests/new.html.erb`, `app/assets/stylesheets/application.css`
 
 ---
 

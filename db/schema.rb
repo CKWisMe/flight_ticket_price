@@ -10,7 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_11_030500) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_11_030700) do
+  create_table "airport_directory_sync_runs", id: :string, force: :cascade do |t|
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.integer "deactivated_record_count", default: 0, null: false
+    t.text "error_summary"
+    t.integer "failed_record_count", default: 0, null: false
+    t.integer "fetched_record_count", default: 0, null: false
+    t.string "source_key", null: false
+    t.string "source_snapshot_version"
+    t.datetime "started_at", null: false
+    t.string "status", null: false
+    t.datetime "updated_at", null: false
+    t.integer "upserted_record_count", default: 0, null: false
+    t.index ["started_at"], name: "index_airport_directory_sync_runs_on_started_at"
+    t.index ["status"], name: "index_airport_directory_sync_runs_on_status"
+  end
+
+  create_table "airports", id: :string, force: :cascade do |t|
+    t.boolean "active", default: true, null: false
+    t.string "city_name", null: false
+    t.string "country_code"
+    t.string "country_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "deactivated_at"
+    t.string "iata_code"
+    t.string "icao_code"
+    t.datetime "last_synced_at", null: false
+    t.string "localized_name_zh"
+    t.string "normalized_city_name", null: false
+    t.string "normalized_iata_code"
+    t.string "normalized_icao_code"
+    t.string "normalized_localized_name_zh"
+    t.string "normalized_official_name_en", null: false
+    t.string "official_name_en", null: false
+    t.string "source_identifier", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active", "normalized_city_name"], name: "index_airports_on_active_and_normalized_city_name"
+    t.index ["active", "normalized_iata_code"], name: "index_airports_on_active_and_normalized_iata_code"
+    t.index ["active", "normalized_icao_code"], name: "index_airports_on_active_and_normalized_icao_code"
+    t.index ["active", "normalized_official_name_en"], name: "index_airports_on_active_and_normalized_official_name_en"
+    t.index ["active"], name: "index_airports_on_active"
+    t.index ["source_identifier"], name: "index_airports_on_source_identifier", unique: true
+  end
+
   create_table "exchange_rate_snapshots", id: :string, force: :cascade do |t|
     t.string "base_currency", null: false
     t.datetime "captured_at", null: false

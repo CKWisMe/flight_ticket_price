@@ -1,10 +1,10 @@
 module SearchResultsHelper
   def search_result_sort_options
     [
-      [ "價格", "price" ],
-      [ "去程出發時間", "outbound_departure" ],
-      [ "回程出發時間", "return_departure" ],
-      [ "總旅行時間", "total_travel_time" ]
+      [ "Price", "price" ],
+      [ "Outbound Departure", "outbound_departure" ],
+      [ "Return Departure", "return_departure" ],
+      [ "Total Travel Time", "total_travel_time" ]
     ]
   end
 
@@ -22,8 +22,8 @@ module SearchResultsHelper
   end
 
   def recommendation_message(recommendation)
-    return "目前尚無足夠結果可以產生推薦。" unless recommendation
+    return "No recommendation is available yet. Results will update when more fares arrive." unless recommendation
 
-    "推薦理由：#{recommendation.explanation}"
+    "Recommended option: #{recommendation.explanation}"
   end
 end
