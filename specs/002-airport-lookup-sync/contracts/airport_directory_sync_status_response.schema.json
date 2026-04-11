@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flight-ticket-price/specs/002-airport-lookup-sync/contracts/airport_directory_sync_status_response.schema.json",
+  "title": "AirportDirectorySyncStatusResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sourceKey",
+    "status",
+    "startedAt",
+    "completedAt",
+    "fetchedRecordCount",
+    "upsertedRecordCount",
+    "deactivatedRecordCount",
+    "failedRecordCount"
+  ],
+  "properties": {
+    "sourceKey": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "succeeded",
+        "partially_succeeded",
+        "failed"
+      ]
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completedAt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "sourceSnapshotVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fetchedRecordCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "upsertedRecordCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "deactivatedRecordCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "failedRecordCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "errorSummary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

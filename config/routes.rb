@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
   root "search_requests#new"
 
+  get "airports/lookup", to: "airports#lookup"
+  resource :airport_directory_sync_status, only: [ :show ]
+
   resources :search_requests, only: [ :new, :create, :show ], path: "search_requests" do
     resource :results, only: [ :show ], controller: "search_results"
   end

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://flight-ticket-price/specs/002-airport-lookup-sync/contracts/airport_lookup_response.schema.json",
+  "title": "AirportLookupResponse",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "query",
+    "normalizedQuery",
+    "matches"
+  ],
+  "properties": {
+    "query": {
+      "type": "string"
+    },
+    "normalizedQuery": {
+      "type": "string"
+    },
+    "matches": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "airportId",
+          "displayName",
+          "airportCode",
+          "cityName",
+          "countryName",
+          "matchType",
+          "selectable"
+        ],
+        "properties": {
+          "airportId": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "airportCode": {
+            "type": "string"
+          },
+          "icaoCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "cityName": {
+            "type": "string"
+          },
+          "countryName": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "matchType": {
+            "type": "string",
+            "enum": [
+              "iata_code",
+              "icao_code",
+              "official_name_en",
+              "localized_name_zh",
+              "city_name"
+            ]
+          },
+          "selectable": {
+            "type": "boolean",
+            "const": true
+          }
+        }
+      }
+    }
+  }
+}

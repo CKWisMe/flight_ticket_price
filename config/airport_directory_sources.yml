@@ -1,0 +1,67 @@
+default_remote: &default_remote
+  source:
+    key: primary
+    adapter: our_airports
+    enabled: true
+    complete_snapshot: true
+    timeout_seconds: 30
+    airports_url: "https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/airports.csv"
+    countries_url: "https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/countries.csv"
+
+default_seed: &default_seed
+  source:
+    key: primary
+    adapter: config
+    enabled: true
+    snapshot_version: "2026-04-11T01:00:00Z"
+    complete_snapshot: true
+    records:
+      - sourceIdentifier: "seed:TPE"
+        iataCode: "TPE"
+        icaoCode: "RCTP"
+        officialNameEn: "Taiwan Taoyuan International Airport"
+        localizedNameZh: "台灣桃園國際機場"
+        cityName: "桃園"
+        countryName: "台灣"
+        countryCode: "TW"
+      - sourceIdentifier: "seed:HND"
+        iataCode: "HND"
+        icaoCode: "RJTT"
+        officialNameEn: "Tokyo Haneda Airport"
+        localizedNameZh: "東京羽田機場"
+        cityName: "東京"
+        countryName: "日本"
+        countryCode: "JP"
+      - sourceIdentifier: "seed:NRT"
+        iataCode: "NRT"
+        icaoCode: "RJAA"
+        officialNameEn: "Narita International Airport"
+        localizedNameZh: "成田國際機場"
+        cityName: "東京"
+        countryName: "日本"
+        countryCode: "JP"
+      - sourceIdentifier: "seed:LHR"
+        iataCode: "LHR"
+        icaoCode: "EGLL"
+        officialNameEn: "Heathrow Airport"
+        localizedNameZh: "倫敦希斯洛機場"
+        cityName: "倫敦"
+        countryName: "英國"
+        countryCode: "GB"
+      - sourceIdentifier: "seed:LGW"
+        iataCode: "LGW"
+        icaoCode: "EGKK"
+        officialNameEn: "Gatwick Airport"
+        localizedNameZh: "倫敦蓋威克機場"
+        cityName: "倫敦"
+        countryName: "英國"
+        countryCode: "GB"
+
+development:
+  <<: *default_remote
+
+test:
+  <<: *default_seed
+
+production:
+  <<: *default_remote
