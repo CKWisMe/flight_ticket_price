@@ -12,15 +12,16 @@ class AirportRepository
     return [] if term.blank?
 
     scope = Airport.active_only
-    conditions = MATCH_FIELDS.values.filter_map do |column|
-      next if column == :normalized_localized_name_zh
-
-      "#{column} LIKE :prefix"
+    airports = Airport.arel_table
+    prefix = "#{term}%"
+    conditions = MATCH_FIELDS.values.map do |column|
+      airports[column].matches(prefix)
+    end.reduce do |expression, condition|
+      expression.or(condition)
     end
-    conditions << "normalized_localized_name_zh LIKE :prefix"
 
     scope
-      .where(conditions.join(" OR "), prefix: "#{term}%")
+      .where(conditions)
       .limit(limit)
       .to_a
   end
