@@ -4,6 +4,8 @@ export default class extends Controller {
   static targets = ["tripType", "legsSection", "legsList", "template", "validation"]
 
   connect() {
+    this.maxLegsMessage = this.validationTarget.dataset.itineraryBuilderMaxLegsMessageValue
+    this.minLegsMessage = this.validationTarget.dataset.itineraryBuilderMinLegsMessageValue
     this.tripTypeChanged()
   }
 
@@ -21,7 +23,7 @@ export default class extends Controller {
 
   addLeg() {
     if (this.legsListTarget.children.length >= 4) {
-      this.validationTarget.textContent = "Multi-city trips support up to 4 legs."
+      this.validationTarget.textContent = this.maxLegsMessage
       return
     }
 
@@ -40,7 +42,7 @@ export default class extends Controller {
 
     const legs = this.legsListTarget.querySelectorAll(".leg-row")
     if (legs.length < 2) {
-      this.validationTarget.textContent = "Multi-city trips require at least 2 legs."
+      this.validationTarget.textContent = this.minLegsMessage
       return
     }
 

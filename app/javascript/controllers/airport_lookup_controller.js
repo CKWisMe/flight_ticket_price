@@ -3,7 +3,12 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["input", "hidden", "list", "status"]
   static values = {
-    endpoint: String
+    endpoint: String,
+    submitError: String,
+    requestError: String,
+    empty: String,
+    countTemplate: String,
+    selectedTemplate: String
   }
 
   connect() {
@@ -69,7 +74,7 @@ export default class extends Controller {
   beforeSubmit(event) {
     if (this.inputTarget.value.trim().length > 0 && this.hiddenTarget.value.trim().length === 0) {
       event.preventDefault()
-      this.statusTarget.textContent = "Select an airport from suggestions before submitting."
+      this.statusTarget.textContent = this.submitErrorValue
       this.statusTarget.dataset.state = "error"
       this.inputTarget.setAttribute("aria-invalid", "true")
     }
@@ -99,7 +104,7 @@ export default class extends Controller {
 
       this.matches = []
       this.hideList()
-      this.statusTarget.textContent = "Airport lookup failed. Please try again."
+      this.statusTarget.textContent = this.requestErrorValue
       this.statusTarget.dataset.state = "error"
     }
   }
@@ -109,12 +114,12 @@ export default class extends Controller {
 
     if (this.matches.length === 0) {
       this.hideList()
-      this.statusTarget.textContent = "No airports matched your query."
+      this.statusTarget.textContent = this.emptyValue
       this.statusTarget.dataset.state = "empty"
       return
     }
 
-    this.statusTarget.textContent = `${this.matches.length} airport suggestions found.`
+    this.statusTarget.textContent = this.countTemplateValue.replace("__COUNT__", this.matches.length)
     this.statusTarget.dataset.state = "info"
     this.inputTarget.setAttribute("aria-expanded", "true")
     this.listTarget.classList.remove("is-hidden")
@@ -146,7 +151,7 @@ export default class extends Controller {
     this.hiddenTarget.value = match.airportCode
     this.inputTarget.value = match.displayName
     this.inputTarget.setAttribute("aria-invalid", "false")
-    this.statusTarget.textContent = `Selected ${match.displayName}.`
+    this.statusTarget.textContent = this.selectedTemplateValue.replace("__AIRPORT__", match.displayName)
     this.statusTarget.dataset.state = "success"
     this.hideList()
   }

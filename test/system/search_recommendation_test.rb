@@ -11,8 +11,8 @@ class SearchRecommendationTest < ApplicationSystemTestCase
 
     visit search_request_results_path(search_request)
 
-    assert_text "Recommendation"
-    assert_text "Recommended option:"
+    assert_text "推薦方案"
+    assert_text "推薦選項："
   end
 
   private

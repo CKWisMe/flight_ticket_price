@@ -21,14 +21,14 @@ export default class extends Controller {
 
       const payload = await response.json()
       if (this.hasRequestStatusTarget) {
-        this.requestStatusTarget.textContent = payload.status
+        this.requestStatusTarget.textContent = payload.statusLabel || payload.status
       }
 
       if (this.hasStatusesTarget) {
         this.statusesTarget.innerHTML = payload.sourceStatuses.map((status) => `
           <div class="status-card">
             <strong>${status.sourceKey}</strong>
-            <span class="status-badge">${status.status}</span>
+            <span class="status-badge">${status.statusLabel || status.status}</span>
           </div>
         `).join("")
       }

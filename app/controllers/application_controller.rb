@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def render_not_found
     respond_to do |format|
-      format.html { redirect_to root_path, alert: "找不到指定的搜尋請求" }
+      format.html { redirect_to root_path, alert: I18n.t("search_requests.flash.not_found") }
       format.json { render json: { error: "not_found" }, status: :not_found }
     end
   end

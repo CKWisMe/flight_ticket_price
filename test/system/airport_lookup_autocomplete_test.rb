@@ -9,16 +9,16 @@ class AirportLookupAutocompleteTest < ApplicationSystemTestCase
   test "user submits a search request after selecting airports" do
     visit root_path
 
-    fill_in "Origin Airport", with: "Taiwan Taoyuan International Airport"
+    fill_in "出發機場", with: "Taiwan Taoyuan International Airport"
     find("input[name='search_request[origin_airport_code]']", visible: false).set("TPE")
-    fill_in "Destination Airport", with: "Narita International Airport"
+    fill_in "目的地機場", with: "Narita International Airport"
     find("input[name='search_request[destination_airport_code]']", visible: false).set("NRT")
-    fill_in "Trip Length (days)", with: 4
-    select "TWD", from: "Display Currency"
+    fill_in "旅遊天數", with: 4
+    select "TWD", from: "顯示幣別"
 
-    click_button "Search Fares"
+    click_button "開始搜尋票價"
 
-    assert_text "Request Status"
-    assert_text "completed"
+    assert_text "搜尋狀態"
+    assert_text "已完成"
   end
 end

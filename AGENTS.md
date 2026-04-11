@@ -1,6 +1,6 @@
 ﻿# flight_ticket_price Development Guidelines
 
-Auto-generated from all feature plans. Last updated: 2026-04-11
+Auto-generated from all feature plans. Last updated: 2026-04-12
 
 ## Active Technologies
 - Ruby 4.0.1 + Rails 8.1.3、Hotwire (`turbo-rails`, `stimulus-rails`)、Jbuilder、Active Job (002-airport-lookup-sync)
@@ -40,5 +40,4 @@ Ruby 4.0.1: Follow standard conventions
 - 001-flight-fare-search: Added Ruby 4.0.1 + Rails 8.1.3、Hotwire (`turbo-rails`, `stimulus-rails`)、Jbuilder、Puma、SQLite3
 
 <!-- MANUAL ADDITIONS START -->
-- Keep flight fare search business logic inside `app/services/` and persistence access inside `app/repositories/`.
 <!-- MANUAL ADDITIONS END -->

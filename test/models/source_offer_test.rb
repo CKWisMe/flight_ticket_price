@@ -23,7 +23,7 @@ class SourceOfferTest < ActiveSupport::TestCase
     )
 
     assert_not offer.valid?
-    assert_includes offer.errors[:normalized_total_amount], "must be greater than or equal to 0"
+    assert offer.errors.added?(:normalized_total_amount, :greater_than_or_equal_to, value: -1, count: 0)
   end
 
   private
