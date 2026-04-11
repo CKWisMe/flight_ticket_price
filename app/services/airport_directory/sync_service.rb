@@ -14,7 +14,7 @@ module AirportDirectory
     end
 
     def call
-      raise "同步來源未啟用" unless registry.enabled?
+      raise "Airport directory source is disabled" unless registry.enabled?
 
       snapshot = registry.build.fetch_snapshot
       synced_at = clock.call
@@ -27,15 +27,19 @@ module AirportDirectory
       upserted_count = 0
       failed_count = 0
       errors = []
-      source_identifiers = []
+      records = Array(snapshot["records"])
+      source_identifiers = records.map { |record| record["sourceIdentifier"] }
 
-      Array(snapshot["records"]).each do |record|
-        source_identifiers << record["sourceIdentifier"]
-        airport_repository.upsert_from_source!(record: record, synced_at: synced_at)
-        upserted_count += 1
-      rescue StandardError => error
-        failed_count += 1
-        errors << "#{record['sourceIdentifier']}: #{error.message}"
+      begin
+        upserted_count = airport_repository.bulk_upsert_from_source!(records: records, synced_at: synced_at)
+      rescue StandardError
+        records.each do |record|
+          airport_repository.upsert_from_source!(record: record, synced_at: synced_at)
+          upserted_count += 1
+        rescue StandardError => error
+          failed_count += 1
+          errors << "#{record['sourceIdentifier']}: #{error.message}"
+        end
       end
 
       deactivated_count =

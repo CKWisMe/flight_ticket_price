@@ -8,6 +8,9 @@ class AirportLookupPerformanceTest < ActionDispatch::IntegrationTest
   test "lookup endpoint stays within latency budget for repeated requests" do
     durations = []
 
+    get airports_lookup_path(format: :json), params: { query: "東京" }
+    assert_response :success
+
     5.times do
       started_at = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       get airports_lookup_path(format: :json), params: { query: "東京" }

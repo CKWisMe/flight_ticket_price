@@ -31,7 +31,7 @@
 - [X] T005 建立機場名錄 migration 於 `db/migrate/*_create_airports.rb` 與同步紀錄 migration 於 `db/migrate/*_create_airport_directory_sync_runs.rb`
 - [X] T006 [P] 建立 `Airport` 與 `AirportDirectorySyncRun` model 於 `app/models/airport.rb`, `app/models/airport_directory_sync_run.rb`
 - [X] T007 [P] 建立資料存取邊界於 `app/repositories/airport_repository.rb`, `app/repositories/airport_directory_sync_run_repository.rb`
-- [X] T008 [P] 建立同步來源 registry 與 base adapter 於 `app/services/airport_directory_sources/registry.rb`, `app/services/airport_directory_sources/base_adapter.rb`, `app/services/airport_directory_sources/config_adapter.rb`
+- [X] T008 [P] 建立同步來源 registry 與 base adapter，並納入 `config` / `our_airports` adapter 於 `app/services/airport_directory_sources/registry.rb`, `app/services/airport_directory_sources/base_adapter.rb`, `app/services/airport_directory_sources/config_adapter.rb`, `app/services/airport_directory_sources/our_airports_adapter.rb`
 - [X] T009 建立共用正規化與比對工具於 `app/services/airports/normalize_query_service.rb`
 - [X] T010 建立同步工作入口於 `app/jobs/airport_directory_sync_job.rb`
 - [X] T011 執行 schema 更新並確認資料表結構反映於 `db/schema.rb`
@@ -164,7 +164,7 @@
 
 - **US1**: MVP 基礎查找能力，無故事前置依賴
 - **US2**: 依賴 US1 的查找 API 與 autocomplete 骨架
-- **US3**: 依賴 Phase 2 的資料模型與同步骨架；完成後反向強化 US1/US2 的真實資料來源
+- **US3**: 依賴 Phase 2 的資料模型與同步骨架；完成後反向強化 US1/US2 的真實資料來源，並以中文優先、英文回退的同步策略改善候選顯示品質
 
 ## 可平行處理項目
 

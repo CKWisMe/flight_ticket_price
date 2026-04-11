@@ -5,7 +5,7 @@
 
 ## 摘要
 
-此功能會為搜尋頁新增機場自動完成查找流程，讓使用者可用機場代號、中文名稱或城市名稱選取正確機場，並在多機場城市情境下強制明確選擇。後端將新增可重複使用的機場名錄資料模型、每週排程同步作業、查找 JSON 契約，以及對應的 controller/service/repository 分層實作；同步流程採可部分成功的 upsert 策略，只有在完整來源快照成功取得時，才會把來源已移除的機場標記為停用。
+此功能會為搜尋頁新增機場自動完成查找流程，讓使用者可用機場代號、中文名稱或城市名稱選取正確機場，並在多機場城市情境下強制明確選擇。後端將新增可重複使用的機場名錄資料模型、每週排程同步作業、查找 JSON 契約，以及對應的 controller/service/repository 分層實作；同步流程採可部分成功的 upsert 策略，只有在完整來源快照成功取得時，才會把來源已移除的機場標記為停用。第一版以 `OurAirports` 為主要同步來源，並在 adapter 內以 `keywords` 的中文別名補齊中文機場名、城市名與國家名，缺值時回退英文。
 
 ## 技術背景
 
@@ -85,7 +85,7 @@ test/
 
 研究成果見 [research.md](D:/flight_ticket_price/specs/002-airport-lookup-sync/research.md)。本階段已解決以下設計未知：
 
-- 同步來源採單一主來源、config-driven adapter，方便在 `test` 以 fixture/mock 取代遠端來源。
+- 同步來源採單一主來源、config-driven adapter，方便在 `test` 以 fixture/mock 取代遠端來源；目前主來源為 `OurAirports`，中文欄位採 `keywords` 中文別名優先、英文回退策略。
 - 查找不依賴外部 API，而是在本地資料表保存正規化欄位後做 prefix query 與排序。
 - 缺漏機場停用只在完整成功同步後執行，避免把來源暫時不完整誤判為刪除。
 - 排程以 `AirportDirectorySyncJob` 為執行單位，由部署環境每週一 01:00 觸發；目前專案已有 `config/deploy.yml`，本功能將沿用該部署設定檔描述排程需求，而非引入新的排程框架。

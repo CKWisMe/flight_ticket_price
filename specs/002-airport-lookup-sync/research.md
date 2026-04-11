@@ -8,6 +8,14 @@
   - 在 service 中直接寫死遠端 URL：太脆弱，測試難以隔離。
   - 一開始就支援多來源合併：超出目前需求，增加對帳與衝突解決複雜度。
 
+### OurAirports 中文欄位策略
+
+- **Decision**: `AirportDirectorySources::OurAirportsAdapter` 以 `airports.csv` 與 `countries.csv` 為主資料來源，並優先解析 `keywords` 欄位中的漢字別名來填入 `localizedNameZh`、`cityName`、`countryName`；若來源未提供可用中文，則回退使用英文 `name`、`municipality` 與 `countries.csv name`。
+- **Rationale**: `OurAirports` 主欄位以英文為主，但部分機場與國家資料可從 `keywords` 補出中文別名。先採「中文優先、英文回退」可在不增加第二資料源的前提下改善中文使用者體驗，同時維持同步流程穩定。
+- **Consequences**:
+  - 中文覆蓋率取決於 `OurAirports keywords` 是否提供中文別名，無法保證所有機場都有完整中文。
+  - 搜尋與顯示層必須接受 `localizedNameZh` 可能缺值，且 `cityName`、`countryName` 可能為英文回退值。
+
 ### 同步來源標準化輸入契約
 
 為避免 `AirportDirectorySources::ConfigAdapter` 實作時缺乏明確輸入形狀，第一版同步來源必須先轉成下列標準化 payload：
@@ -34,8 +42,8 @@
 - `snapshotVersion`: 來源快照版本、ETag 或時間戳字串。
 - `completeSnapshot`: `true` 代表可據此停用缺席機場；`false` 代表只允許 upsert，不可停用。
 - `records[*].sourceIdentifier`: 穩定唯一鍵，第一版不得以可變名稱欄位代替。
-- `records[*].officialNameEn`, `cityName`, `countryName`: 必填。
-- `records[*].iataCode`, `icaoCode`, `localizedNameZh`, `countryCode`: 可選，但若存在需在 adapter 內先正規化。
+- `records[*].officialNameEn`, `cityName`, `countryName`: 必填；其中 `cityName`、`countryName` 可為中文優先值，也可在來源缺值時回退為英文。
+- `records[*].iataCode`, `icaoCode`, `localizedNameZh`, `countryCode`: 可選，但若存在需在 adapter 內先正規化；`localizedNameZh` 允許因來源缺少中文別名而為空。
 
 `test` 環境必須以 fixture/stub 產生同形資料，避免在 service 測試中直接依賴外部來源原始欄位名稱。
 

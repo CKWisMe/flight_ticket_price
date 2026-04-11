@@ -1,4 +1,14 @@
-default: &default
+default_remote: &default_remote
+  source:
+    key: primary
+    adapter: our_airports
+    enabled: true
+    complete_snapshot: true
+    timeout_seconds: 30
+    airports_url: "https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/airports.csv"
+    countries_url: "https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/countries.csv"
+
+default_seed: &default_seed
   source:
     key: primary
     adapter: config
@@ -48,16 +58,10 @@ default: &default
         countryCode: "GB"
 
 development:
-  <<: *default
+  <<: *default_remote
 
 test:
-  <<: *default
+  <<: *default_seed
 
 production:
-  source:
-    key: primary
-    adapter: config
-    enabled: false
-    snapshot_version: null
-    complete_snapshot: true
-    records: []
+  <<: *default_remote

@@ -16,6 +16,8 @@ module AirportDirectorySources
       case source_config.fetch("adapter")
       when "config"
         AirportDirectorySources::ConfigAdapter.new(settings: source_config)
+      when "our_airports"
+        AirportDirectorySources::OurAirportsAdapter.new(settings: source_config)
       else
         raise ArgumentError, "Unknown airport directory adapter: #{source_config['adapter']}"
       end

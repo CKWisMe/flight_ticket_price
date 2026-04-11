@@ -12,10 +12,10 @@
 | `source_identifier` | string | 是 | 來源資料的穩定唯一識別，供 upsert 使用 |
 | `iata_code` | string | 否 | 三碼機場代號；顯示與查找用途 |
 | `icao_code` | string | 否 | 四碼機場代號；顯示與查找用途 |
-| `official_name_en` | string | 是 | 官方英文名 |
-| `localized_name_zh` | string | 否 | 中文名稱 |
-| `city_name` | string | 是 | 所在城市名稱 |
-| `country_name` | string | 是 | 國家或地區名稱 |
+| `official_name_en` | string | 是 | 官方英文名，作為穩定原始名稱與中文缺值時的回退顯示 |
+| `localized_name_zh` | string | 否 | 中文名稱；若同步來源未提供中文別名可為空 |
+| `city_name` | string | 是 | 所在城市名稱；同步時優先寫入中文，缺值時回退英文 |
+| `country_name` | string | 是 | 國家或地區名稱；同步時優先寫入中文，缺值時回退英文 |
 | `country_code` | string | 否 | ISO 國家或地區代碼，供排序與過濾 |
 | `normalized_iata_code` | string | 否 | 正規化後 IATA，用於查找 |
 | `normalized_icao_code` | string | 否 | 正規化後 ICAO，用於查找 |
