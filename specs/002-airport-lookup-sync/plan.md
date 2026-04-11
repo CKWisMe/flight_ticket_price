@@ -104,7 +104,7 @@ test/
 2. 建立 `AirportDirectorySources` adapter/registry 與 `AirportDirectory::SyncService`、`AirportDirectorySyncJob`。
 3. 建立 `Airports::LookupService`、查找 endpoint、Jbuilder 輸出與 sync status endpoint。
 4. 將搜尋頁起飛地/目的地欄位改為 Stimulus autocomplete 互動，保留最終選定的機場代號。
-5. 補齊 controller/service/repository/model/system/integration tests，確認查找延遲與無障礙行為。
+5. 補齊 controller/service/repository/model/system/integration tests，確認查找延遲、固定排程與無障礙行為。
 
 ## Phase 1 設計後 Constitution Check
 

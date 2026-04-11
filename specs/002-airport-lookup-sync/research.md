@@ -8,6 +8,37 @@
   - 在 service 中直接寫死遠端 URL：太脆弱，測試難以隔離。
   - 一開始就支援多來源合併：超出目前需求，增加對帳與衝突解決複雜度。
 
+### 同步來源標準化輸入契約
+
+為避免 `AirportDirectorySources::ConfigAdapter` 實作時缺乏明確輸入形狀，第一版同步來源必須先轉成下列標準化 payload：
+
+```json
+{
+  "snapshotVersion": "2026-04-11T01:00:00Z",
+  "completeSnapshot": true,
+  "records": [
+    {
+      "sourceIdentifier": "ourairports:RJTT",
+      "iataCode": "HND",
+      "icaoCode": "RJTT",
+      "officialNameEn": "Tokyo Haneda International Airport",
+      "localizedNameZh": "東京羽田機場",
+      "cityName": "東京",
+      "countryName": "日本",
+      "countryCode": "JP"
+    }
+  ]
+}
+```
+
+- `snapshotVersion`: 來源快照版本、ETag 或時間戳字串。
+- `completeSnapshot`: `true` 代表可據此停用缺席機場；`false` 代表只允許 upsert，不可停用。
+- `records[*].sourceIdentifier`: 穩定唯一鍵，第一版不得以可變名稱欄位代替。
+- `records[*].officialNameEn`, `cityName`, `countryName`: 必填。
+- `records[*].iataCode`, `icaoCode`, `localizedNameZh`, `countryCode`: 可選，但若存在需在 adapter 內先正規化。
+
+`test` 環境必須以 fixture/stub 產生同形資料，避免在 service 測試中直接依賴外部來源原始欄位名稱。
+
 ## 決策 2：查找採本地名錄 + 正規化欄位 prefix query
 
 - **Decision**: `airports` 資料表保存代號、名稱、城市的正規化欄位，由 `Airports::LookupService` 對本地資料做 prefix query，再依國家完全匹配與名稱匹配度排序。
@@ -31,6 +62,14 @@
 - **Alternatives considered**:
   - 在 Rails app 內自行維護 scheduler loop：部署複雜且不穩定。
   - 只提供手動同步：不符合規格的固定時程需求。
+
+### 排程落地策略
+
+- 第一版以部署平台 scheduler 或 cron 在每週一 `01:00` 執行 `ruby bin/rails runner "AirportDirectorySyncJob.perform_now"`。
+- 規劃與 tasks 必須同時包含：
+  - 排程設定檔或部署 runbook
+  - 至少一個驗證任務，確認 scheduler 會呼叫正確 job
+  - 失敗時可從同步狀態 endpoint 或資料表辨識最近一次執行結果
 
 ## 決策 5：前端採 Stimulus autocomplete，不改變既有搜尋送出契約
 

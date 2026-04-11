@@ -23,6 +23,20 @@ ruby bin/rails runner "AirportDirectorySyncJob.perform_now"
 - 建立一筆最新的 `airport_directory_sync_runs`
 - 若來源完整成功且某機場已不在來源中，該機場會被標記為停用
 
+## 2.1 設定固定排程
+
+正式環境需由部署平台 scheduler 或 cron 在每週一 `01:00` 執行：
+
+```powershell
+ruby bin/rails runner "AirportDirectorySyncJob.perform_now"
+```
+
+驗證要點：
+
+- scheduler 指向正式環境的應用程式與正確 working directory
+- 最近一次執行結果可透過 `airport_directory_sync_runs` 或同步狀態 API 查到
+- 若 scheduler 失敗，不應影響既有 `active` 名錄被查找使用
+
 ## 3. 啟動 Rails server
 
 ```powershell
