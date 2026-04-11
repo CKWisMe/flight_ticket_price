@@ -51,7 +51,7 @@ class SourceOfferRepositoryTest < ActiveSupport::TestCase
         outbound_arrival_at: 2.hours.from_now,
         return_departure_at: 3.days.from_now,
         return_arrival_at: 3.days.from_now + 2.hours,
-        itinerary_payload: [{ leg: 1 }],
+        itinerary_payload: [ { leg: 1 } ],
         booking_url: "https://example.com/#{reference}",
         fetched_at: Time.current,
         stale_at: 30.minutes.from_now,

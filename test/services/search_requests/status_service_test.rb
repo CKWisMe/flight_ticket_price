@@ -28,7 +28,7 @@ class SearchRequests::StatusServiceTest < ActiveSupport::TestCase
       total_travel_minutes: 180,
       outbound_departure_at: Time.current,
       outbound_arrival_at: 3.hours.from_now,
-      itinerary_payload: [{ leg: 1 }],
+      itinerary_payload: [ { leg: 1 } ],
       booking_url: "https://example.com",
       fetched_at: Time.current,
       price_disclosure: "price",
