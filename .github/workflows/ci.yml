@@ -2,8 +2,10 @@ name: CI
 
 on:
   pull_request:
+    types: [ opened, synchronize, reopened ]
   push:
-    branches: [ master ]
+    branches:
+      - "**"
 
 jobs:
   scan_ruby:
