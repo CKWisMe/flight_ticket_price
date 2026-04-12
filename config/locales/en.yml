@@ -1,31 +1,101 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  shared:
+    to: "to"
+  search_requests:
+    flash:
+      created: "Search request submitted. Pricing results are being prepared."
+      invalid: "Please review the airport and date fields before submitting."
+      not_found: "The requested search could not be found."
+    statuses:
+      queued: "Queued"
+      running: "Running"
+      partially_completed: "Partially completed"
+      completed: "Completed"
+      failed: "Failed"
+    source_statuses:
+      pending: "Pending"
+      fetching: "Fetching"
+      succeeded: "Succeeded"
+      no_results: "No results"
+      timed_out: "Timed out"
+      failed: "Failed"
+      disabled: "Disabled"
+    new:
+      eyebrow: "Flight Fare Search"
+      title: "Plan your next trip"
+      subtitle: "Search airports by code, city, or localized name before starting the fare search."
+    form:
+      trip_type: "Trip Type"
+      trip_types:
+        one_way: "One Way"
+        round_trip: "Round Trip"
+        multi_city: "Multi City"
+      origin_airport: "Origin Airport"
+      destination_airport: "Destination Airport"
+      airport_placeholder: "Search by airport code, city, or name"
+      direct_only: "Direct flights only"
+      departure_window_start_on: "Earliest Departure"
+      departure_window_end_on: "Latest Departure"
+      stay_length_days: "Trip Length (days)"
+      display_currency: "Display Currency"
+      submit: "Search Fares"
+      multi_city:
+        title: "Multi-city Legs"
+        add_leg: "Add Leg"
+        position: "Leg Position"
+        origin_airport_code: "Origin Airport Code"
+        destination_airport_code: "Destination Airport Code"
+        departure_on: "Departure Date"
+        origin_placeholder: "TPE"
+        destination_placeholder: "KIX"
+        max_legs: "Multi-city trips support up to 4 legs."
+        min_legs: "Multi-city trips require at least 2 legs."
+    airport_lookup:
+      submit_error: "Select an airport from suggestions before submitting."
+      request_error: "Airport lookup failed. Please try again."
+      empty: "No airports matched your query."
+      count: "%{count} airport suggestions found."
+      selected: "Selected %{airport}."
+    show:
+      eyebrow: "Search Request"
+      title: "Request Status"
+      summary:
+        trip_type: "Trip Type"
+        departure_window: "Departure Window"
+        stay_length_days: "Trip Length"
+        stay_length_value: "%{count} days"
+        display_currency: "Currency"
+      source_statuses:
+        title: "Source Statuses"
+        subtitle: "Each fare source updates independently while the search remains in progress."
+      results:
+        title: "Results"
+        cta: "View Results"
+  search_results:
+    show:
+      eyebrow: "Results"
+      title: "Fare Results"
+      back_to_home: "Back to Home"
+      sort_label: "Sort By"
+      source_statuses_title: "Source Statuses"
+      offer_comparison_title: "Offer Comparison"
+      offer_comparison_subtitle: "Compare price, schedule, and disclosures before opening the provider booking page."
+      empty_state: "No fares are available yet. Check back after the search sources finish fetching results."
+      direct_flight: "Direct"
+      indirect_flight: "Indirect"
+      open_booking: "Open Booking"
+      summary:
+        outbound: "Outbound"
+        return: "Return"
+        total_travel_time: "Total Travel Time"
+        total_travel_time_value: "%{count} minutes"
+        fetched_at: "Fetched At"
+    recommendation:
+      title: "Recommendation"
+      empty: "No recommendation is available yet. Results will update when more fares arrive."
+      present: "Recommended option: %{explanation}"
+    sort_options:
+      price: "Price"
+      outbound_departure: "Outbound Departure"
+      return_departure: "Return Departure"
+      total_travel_time: "Total Travel Time"

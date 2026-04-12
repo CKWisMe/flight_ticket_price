@@ -1,0 +1,108 @@
+zh-TW:
+  shared:
+    to: "至"
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%Y-%m-%d"
+  time:
+    formats:
+      short: "%Y-%m-%d %H:%M"
+  search_requests:
+    flash:
+      created: "搜尋請求已送出，票價結果正在準備中。"
+      invalid: "送出前請確認機場與日期欄位。"
+      not_found: "找不到指定的搜尋請求。"
+    statuses:
+      queued: "排隊中"
+      running: "查詢中"
+      partially_completed: "部分完成"
+      completed: "已完成"
+      failed: "失敗"
+    source_statuses:
+      pending: "等待中"
+      fetching: "擷取中"
+      succeeded: "成功"
+      no_results: "無結果"
+      timed_out: "逾時"
+      failed: "失敗"
+      disabled: "停用"
+    new:
+      eyebrow: "機票比價搜尋"
+      title: "規劃下一趟旅程"
+      subtitle: "開始票價搜尋前，可先用機場代碼、城市或在地化名稱查找機場。"
+    form:
+      trip_type: "旅程類型"
+      trip_types:
+        one_way: "單程"
+        round_trip: "來回"
+        multi_city: "多點進出"
+      origin_airport: "出發機場"
+      destination_airport: "目的地機場"
+      airport_placeholder: "依機場代碼、城市或名稱搜尋"
+      direct_only: "只看直飛航班"
+      departure_window_start_on: "最早出發日"
+      departure_window_end_on: "最晚出發日"
+      stay_length_days: "旅遊天數"
+      display_currency: "顯示幣別"
+      submit: "開始搜尋票價"
+      multi_city:
+        title: "多點進出航段"
+        add_leg: "新增航段"
+        position: "航段順序"
+        origin_airport_code: "出發機場代碼"
+        destination_airport_code: "目的地機場代碼"
+        departure_on: "出發日期"
+        origin_placeholder: "TPE"
+        destination_placeholder: "KIX"
+        max_legs: "多點進出最多支援 4 段航程。"
+        min_legs: "多點進出至少需要 2 段航程。"
+    airport_lookup:
+      submit_error: "送出前請先從建議清單選擇機場。"
+      request_error: "機場查找失敗，請稍後再試。"
+      empty: "找不到符合條件的機場。"
+      count: "找到 %{count} 個機場建議。"
+      selected: "已選擇 %{airport}。"
+    show:
+      eyebrow: "搜尋請求"
+      title: "搜尋狀態"
+      summary:
+        trip_type: "旅程類型"
+        departure_window: "出發區間"
+        stay_length_days: "旅遊天數"
+        stay_length_value: "%{count} 天"
+        display_currency: "顯示幣別"
+      source_statuses:
+        title: "來源狀態"
+        subtitle: "搜尋進行期間，各票價來源會獨立更新。"
+      results:
+        title: "搜尋結果"
+        cta: "查看結果"
+  search_results:
+    show:
+      eyebrow: "搜尋結果"
+      title: "票價結果"
+      back_to_home: "回到首頁"
+      sort_label: "排序方式"
+      source_statuses_title: "來源狀態"
+      offer_comparison_title: "航班比較"
+      offer_comparison_subtitle: "開啟供應商訂票頁前，先比較價格、時程與揭露資訊。"
+      empty_state: "目前還沒有可顯示的票價，請稍後再查看搜尋來源的更新結果。"
+      direct_flight: "直飛"
+      indirect_flight: "轉機"
+      open_booking: "開啟訂票頁"
+      summary:
+        outbound: "去程"
+        return: "回程"
+        total_travel_time: "總旅行時間"
+        total_travel_time_value: "%{count} 分鐘"
+        fetched_at: "擷取時間"
+    recommendation:
+      title: "推薦方案"
+      empty: "目前尚無推薦方案，待更多票價到齊後會自動更新。"
+      present: "推薦選項：%{explanation}"
+    sort_options:
+      price: "價格"
+      outbound_departure: "去程出發"
+      return_departure: "回程出發"
+      total_travel_time: "總旅行時間"

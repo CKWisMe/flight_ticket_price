@@ -2,29 +2,29 @@
   <section class="panel">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Search Request</p>
-        <h1>Request Status</h1>
+        <p class="eyebrow"><%= t("search_requests.show.eyebrow") %></p>
+        <h1><%= t("search_requests.show.title") %></h1>
       </div>
       <span class="<%= source_status_badge_class(@search_request.status) %>" data-search-status-target="requestStatus">
-        <%= @search_request.status %>
+        <%= translated_search_request_status(@search_request.status) %>
       </span>
     </div>
 
     <dl class="summary-grid">
       <div>
-        <dt>Trip Type</dt>
-        <dd><%= @search_request.trip_type %></dd>
+        <dt><%= t("search_requests.show.summary.trip_type") %></dt>
+        <dd><%= translated_trip_type(@search_request.trip_type) %></dd>
       </div>
       <div>
-        <dt>Departure Window</dt>
-        <dd><%= @search_request.departure_window_start_on %> to <%= @search_request.departure_window_end_on %></dd>
+        <dt><%= t("search_requests.show.summary.departure_window") %></dt>
+        <dd><%= @search_request.departure_window_start_on %> <%= t("shared.to") %> <%= @search_request.departure_window_end_on %></dd>
       </div>
       <div>
-        <dt>Trip Length</dt>
-        <dd><%= @search_request.stay_length_days %> days</dd>
+        <dt><%= t("search_requests.show.summary.stay_length_days") %></dt>
+        <dd><%= t("search_requests.show.summary.stay_length_value", count: @search_request.stay_length_days) %></dd>
       </div>
       <div>
-        <dt>Currency</dt>
+        <dt><%= t("search_requests.show.summary.display_currency") %></dt>
         <dd><%= @search_request.display_currency %></dd>
       </div>
     </dl>
@@ -32,14 +32,14 @@
 
   <section class="panel">
     <div class="section-heading">
-      <h2>Source Statuses</h2>
-      <p class="muted">Each fare source updates independently while the search remains in progress.</p>
+      <h2><%= t("search_requests.show.source_statuses.title") %></h2>
+      <p class="muted"><%= t("search_requests.show.source_statuses.subtitle") %></p>
     </div>
     <div class="status-list" data-search-status-target="statuses">
       <% @search_request.source_statuses.each do |status| %>
         <div class="status-card">
           <strong><%= status.source_key %></strong>
-          <span class="<%= source_status_badge_class(status.status) %>"><%= status.status %></span>
+          <span class="<%= source_status_badge_class(status.status) %>"><%= translated_source_status(status.status) %></span>
           <% if status.error_message.present? %>
             <p><%= status.error_message %></p>
           <% end %>
@@ -50,8 +50,8 @@
 
   <section class="panel">
     <div class="section-heading">
-      <h2>Results</h2>
-      <%= link_to "View Results", search_request_results_path(@search_request), class: "primary-button" %>
+      <h2><%= t("search_requests.show.results.title") %></h2>
+      <%= link_to t("search_requests.show.results.cta"), search_request_results_path(@search_request), class: "primary-button" %>
     </div>
   </section>
 </div>

@@ -1,5 +1,6 @@
 json.searchRequestId @results_payload[:search_request_id]
 json.status @results_payload[:status]
+json.statusLabel translated_search_request_status(@results_payload[:status])
 json.displayCurrency @results_payload[:display_currency]
 json.recommendation do
   if @results_payload[:recommendation]
@@ -11,6 +12,7 @@ end
 json.sourceStatuses @results_payload[:source_statuses] do |source_status|
   json.sourceKey source_status[:source_key]
   json.status source_status[:status]
+  json.statusLabel translated_source_status(source_status[:status])
   json.errorCode source_status[:error_code]
   json.fetchedAt source_status[:fetched_at]
 end

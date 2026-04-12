@@ -1,10 +1,10 @@
 module SearchResultsHelper
   def search_result_sort_options
     [
-      [ "Price", "price" ],
-      [ "Outbound Departure", "outbound_departure" ],
-      [ "Return Departure", "return_departure" ],
-      [ "Total Travel Time", "total_travel_time" ]
+      [ t("search_results.sort_options.price"), "price" ],
+      [ t("search_results.sort_options.outbound_departure"), "outbound_departure" ],
+      [ t("search_results.sort_options.return_departure"), "return_departure" ],
+      [ t("search_results.sort_options.total_travel_time"), "total_travel_time" ]
     ]
   end
 
@@ -21,9 +21,21 @@ module SearchResultsHelper
     end
   end
 
-  def recommendation_message(recommendation)
-    return "No recommendation is available yet. Results will update when more fares arrive." unless recommendation
+  def translated_search_request_status(status)
+    t("search_requests.statuses.#{status}", default: status.to_s.humanize)
+  end
 
-    "Recommended option: #{recommendation.explanation}"
+  def translated_source_status(status)
+    t("search_requests.source_statuses.#{status}", default: status.to_s.humanize)
+  end
+
+  def translated_trip_type(trip_type)
+    t("search_requests.form.trip_types.#{trip_type}", default: trip_type.to_s.humanize)
+  end
+
+  def recommendation_message(recommendation)
+    return t("search_results.recommendation.empty") unless recommendation
+
+    t("search_results.recommendation.present", explanation: recommendation.explanation)
   end
 end

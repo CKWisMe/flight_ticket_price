@@ -5,6 +5,6 @@ class RecommendationTest < ActiveSupport::TestCase
     recommendation = Recommendation.new(reason_code: "lowest_total_price", ranked_at: Time.current)
 
     assert_not recommendation.valid?
-    assert_includes recommendation.errors[:explanation], "can't be blank"
+    assert recommendation.errors.added?(:explanation, :blank)
   end
 end

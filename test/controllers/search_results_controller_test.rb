@@ -32,4 +32,13 @@ class SearchResultsControllerTest < ActionDispatch::IntegrationTest
     assert payload["offers"].first["bookingUrl"].present?
     assert payload["offers"].first["priceDisclosure"].present?
   end
+
+  test "redirects missing html requests to root with zh-TW alert" do
+    get search_request_results_path("missing-id")
+
+    assert_redirected_to root_path
+    follow_redirect!
+
+    assert_match "找不到指定的搜尋請求。", flash[:alert]
+  end
 end

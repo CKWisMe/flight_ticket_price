@@ -2,32 +2,35 @@
   <section class="panel">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Results</p>
-        <h1>Fare Results</h1>
+        <p class="eyebrow"><%= t("search_results.show.eyebrow") %></p>
+        <h1><%= t("search_results.show.title") %></h1>
       </div>
-      <span class="<%= source_status_badge_class(@search_request.status) %>"><%= @search_request.status %></span>
+      <div class="actions">
+        <span class="<%= source_status_badge_class(@search_request.status) %>"><%= translated_search_request_status(@search_request.status) %></span>
+        <%= link_to t("search_results.show.back_to_home"), root_path, class: "secondary-button" %>
+      </div>
     </div>
 
     <div class="recommendation-card">
-      <h2>Recommendation</h2>
+      <h2><%= t("search_results.recommendation.title") %></h2>
       <p><%= recommendation_message(@search_request.recommendation) %></p>
     </div>
 
     <%= form_with url: search_request_results_path(@search_request), method: :get, class: "sort-form" do |form| %>
-      <%= form.label :sort, "Sort By" %>
+      <%= form.label :sort, t("search_results.show.sort_label") %>
       <%= form.select :sort, options_for_select(search_result_sort_options, @sort), {}, onchange: "this.form.requestSubmit()" %>
     <% end %>
   </section>
 
   <section class="panel">
     <div class="section-heading">
-      <h2>Source Statuses</h2>
+      <h2><%= t("search_results.show.source_statuses_title") %></h2>
     </div>
     <div class="status-list">
       <% @search_request.source_statuses.each do |status| %>
         <div class="status-card">
           <strong><%= status.source_key %></strong>
-          <span class="<%= source_status_badge_class(status.status) %>"><%= status.status %></span>
+          <span class="<%= source_status_badge_class(status.status) %>"><%= translated_source_status(status.status) %></span>
           <% if status.error_message.present? %>
             <p><%= status.error_message %></p>
           <% end %>
@@ -38,14 +41,13 @@
 
   <section class="panel">
     <div class="section-heading">
-      <h2>Offer Comparison</h2>
-      <p class="muted">Compare price, schedule, and disclosures before opening the provider booking page.</p>
+      <h2><%= t("search_results.show.offer_comparison_title") %></h2>
+      <p class="muted"><%= t("search_results.show.offer_comparison_subtitle") %></p>
     </div>
 
     <% if @offers.empty? %>
       <div class="empty-state">
-        <p>No fares are available yet. Check back after the search sources finish fetching results.</p>
-        <%= link_to "Start Another Search", root_path, class: "secondary-button" %>
+        <p><%= t("search_results.show.empty_state") %></p>
       </div>
     <% else %>
       <div class="offer-list">
@@ -58,27 +60,27 @@
               </div>
               <div class="offer-meta">
                 <span><%= offer.original_currency %> <%= offer.total_amount.to_f.round(2) %></span>
-                <span><%= offer.direct_flight ? "Direct" : "Indirect" %></span>
+                <span><%= offer.direct_flight ? t("search_results.show.direct_flight") : t("search_results.show.indirect_flight") %></span>
               </div>
             </header>
 
             <dl class="summary-grid">
               <div>
-                <dt>Outbound</dt>
+                <dt><%= t("search_results.show.summary.outbound") %></dt>
                 <dd><%= l(offer.outbound_departure_at, format: :short) %> - <%= l(offer.outbound_arrival_at, format: :short) %></dd>
               </div>
               <% if offer.return_departure_at.present? %>
                 <div>
-                  <dt>Return</dt>
+                  <dt><%= t("search_results.show.summary.return") %></dt>
                   <dd><%= l(offer.return_departure_at, format: :short) %> - <%= l(offer.return_arrival_at, format: :short) %></dd>
                 </div>
               <% end %>
               <div>
-                <dt>Total Travel Time</dt>
-                <dd><%= offer.total_travel_minutes %> minutes</dd>
+                <dt><%= t("search_results.show.summary.total_travel_time") %></dt>
+                <dd><%= t("search_results.show.summary.total_travel_time_value", count: offer.total_travel_minutes) %></dd>
               </div>
               <div>
-                <dt>Fetched At</dt>
+                <dt><%= t("search_results.show.summary.fetched_at") %></dt>
                 <dd><%= l(offer.fetched_at, format: :short) %></dd>
               </div>
             </dl>
@@ -89,7 +91,7 @@
               <li><%= offer.exchange_rate_disclosure %></li>
             </ul>
 
-            <%= link_to "Open Booking", offer.booking_url, class: "primary-button", target: "_blank", rel: "noreferrer noopener" %>
+            <%= link_to t("search_results.show.open_booking"), offer.booking_url, class: "primary-button", target: "_blank", rel: "noreferrer noopener" %>
           </article>
         <% end %>
       </div>

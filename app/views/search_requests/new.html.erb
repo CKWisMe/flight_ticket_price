@@ -1,29 +1,29 @@
 <div class="page-shell">
   <section class="hero-card">
-    <p class="eyebrow">Flight Fare Search</p>
-    <h1>Plan your next trip</h1>
-    <p class="hero-copy">Search airports by code, city, or localized name before starting the fare search.</p>
+    <p class="eyebrow"><%= t("search_requests.new.eyebrow") %></p>
+    <h1><%= t("search_requests.new.title") %></h1>
+    <p class="hero-copy"><%= t("search_requests.new.subtitle") %></p>
   </section>
 
   <section class="panel">
     <%= form_with url: search_requests_path, scope: :search_request, class: "search-form", data: { controller: "itinerary-builder" } do |form| %>
       <div class="form-grid">
         <div class="field">
-          <%= form.label :trip_type, "Trip Type" %>
-          <%= form.select :trip_type, [["One Way", "one_way"], ["Round Trip", "round_trip"], ["Multi City", "multi_city"]], { selected: @search_request.trip_type }, data: { action: "change->itinerary-builder#tripTypeChanged", itinerary_builder_target: "tripType" } %>
+          <%= form.label :trip_type, t("search_requests.form.trip_type") %>
+          <%= form.select :trip_type, trip_type_options, { selected: @search_request.trip_type }, data: { action: "change->itinerary-builder#tripTypeChanged", itinerary_builder_target: "tripType" } %>
         </div>
 
-        <div class="field airport-field" data-controller="airport-lookup" data-airport-lookup-endpoint-value="<%= airports_lookup_path(format: :json) %>" data-action="submit->airport-lookup#beforeSubmit">
-          <%= label_tag :origin_airport_query, "Origin Airport" %>
-          <%= text_field_tag :origin_airport_query, @search_request.origin_airport_code, autocomplete: "off", placeholder: "Search by airport code, city, or name", data: { airport_lookup_target: "input", action: "input->airport-lookup#inputChanged keydown->airport-lookup#keydown blur->airport-lookup#blur" }, role: "combobox", aria: { expanded: false, autocomplete: "list" } %>
+        <div class="field airport-field" data-controller="airport-lookup" data-airport-lookup-endpoint-value="<%= airports_lookup_path(format: :json) %>" data-airport-lookup-submit-error-value="<%= t("search_requests.airport_lookup.submit_error") %>" data-airport-lookup-request-error-value="<%= t("search_requests.airport_lookup.request_error") %>" data-airport-lookup-empty-value="<%= t("search_requests.airport_lookup.empty") %>" data-airport-lookup-count-template-value="<%= t("search_requests.airport_lookup.count", count: "__COUNT__") %>" data-airport-lookup-selected-template-value="<%= t("search_requests.airport_lookup.selected", airport: "__AIRPORT__") %>" data-action="submit->airport-lookup#beforeSubmit">
+          <%= label_tag :origin_airport_query, t("search_requests.form.origin_airport") %>
+          <%= text_field_tag :origin_airport_query, @search_request.origin_airport_code, autocomplete: "off", placeholder: t("search_requests.form.airport_placeholder"), data: { airport_lookup_target: "input", action: "input->airport-lookup#inputChanged keydown->airport-lookup#keydown blur->airport-lookup#blur" }, role: "combobox", aria: { expanded: false, autocomplete: "list" } %>
           <%= form.hidden_field :origin_airport_code, value: @search_request.origin_airport_code, data: { airport_lookup_target: "hidden" } %>
           <p class="airport-lookup-status" data-airport-lookup-target="status"></p>
           <div class="airport-lookup-list is-hidden" data-airport-lookup-target="list" role="listbox"></div>
         </div>
 
-        <div class="field airport-field" data-controller="airport-lookup" data-airport-lookup-endpoint-value="<%= airports_lookup_path(format: :json) %>" data-action="submit->airport-lookup#beforeSubmit">
-          <%= label_tag :destination_airport_query, "Destination Airport" %>
-          <%= text_field_tag :destination_airport_query, @search_request.destination_airport_code, autocomplete: "off", placeholder: "Search by airport code, city, or name", data: { airport_lookup_target: "input", action: "input->airport-lookup#inputChanged keydown->airport-lookup#keydown blur->airport-lookup#blur" }, role: "combobox", aria: { expanded: false, autocomplete: "list" } %>
+        <div class="field airport-field" data-controller="airport-lookup" data-airport-lookup-endpoint-value="<%= airports_lookup_path(format: :json) %>" data-airport-lookup-submit-error-value="<%= t("search_requests.airport_lookup.submit_error") %>" data-airport-lookup-request-error-value="<%= t("search_requests.airport_lookup.request_error") %>" data-airport-lookup-empty-value="<%= t("search_requests.airport_lookup.empty") %>" data-airport-lookup-count-template-value="<%= t("search_requests.airport_lookup.count", count: "__COUNT__") %>" data-airport-lookup-selected-template-value="<%= t("search_requests.airport_lookup.selected", airport: "__AIRPORT__") %>" data-action="submit->airport-lookup#beforeSubmit">
+          <%= label_tag :destination_airport_query, t("search_requests.form.destination_airport") %>
+          <%= text_field_tag :destination_airport_query, @search_request.destination_airport_code, autocomplete: "off", placeholder: t("search_requests.form.airport_placeholder"), data: { airport_lookup_target: "input", action: "input->airport-lookup#inputChanged keydown->airport-lookup#keydown blur->airport-lookup#blur" }, role: "combobox", aria: { expanded: false, autocomplete: "list" } %>
           <%= form.hidden_field :destination_airport_code, value: @search_request.destination_airport_code, data: { airport_lookup_target: "hidden" } %>
           <p class="airport-lookup-status" data-airport-lookup-target="status"></p>
           <div class="airport-lookup-list is-hidden" data-airport-lookup-target="list" role="listbox"></div>
@@ -32,37 +32,37 @@
         <div class="field checkbox-field">
           <%= form.label :direct_only do %>
             <%= form.check_box :direct_only, checked: @search_request.direct_only %>
-            Direct flights only
+            <%= t("search_requests.form.direct_only") %>
           <% end %>
         </div>
 
         <div class="field">
-          <%= form.label :departure_window_start_on, "Earliest Departure" %>
+          <%= form.label :departure_window_start_on, t("search_requests.form.departure_window_start_on") %>
           <%= form.date_field :departure_window_start_on, required: true, value: @search_request.departure_window_start_on %>
         </div>
 
         <div class="field">
-          <%= form.label :departure_window_end_on, "Latest Departure" %>
+          <%= form.label :departure_window_end_on, t("search_requests.form.departure_window_end_on") %>
           <%= form.date_field :departure_window_end_on, required: true, value: @search_request.departure_window_end_on %>
         </div>
 
         <div class="field">
-          <%= form.label :stay_length_days, "Trip Length (days)" %>
+          <%= form.label :stay_length_days, t("search_requests.form.stay_length_days") %>
           <%= form.number_field :stay_length_days, min: 1, required: true, value: @search_request.stay_length_days, data: { action: "input->itinerary-builder#validate" } %>
         </div>
 
         <div class="field">
-          <%= form.label :display_currency, "Display Currency" %>
+          <%= form.label :display_currency, t("search_requests.form.display_currency") %>
           <%= form.select :display_currency, [["TWD", "TWD"], ["USD", "USD"], ["JPY", "JPY"]], { selected: @search_request.display_currency }, required: true %>
         </div>
       </div>
 
-      <div class="validation-message" data-itinerary-builder-target="validation"></div>
+      <div class="validation-message" data-itinerary-builder-target="validation" data-itinerary-builder-max-legs-message-value="<%= t("search_requests.form.multi_city.max_legs") %>" data-itinerary-builder-min-legs-message-value="<%= t("search_requests.form.multi_city.min_legs") %>"></div>
 
       <section class="panel nested-panel is-hidden" data-itinerary-builder-target="legsSection">
         <div class="section-heading">
-          <h2>Multi-city Legs</h2>
-          <button type="button" class="secondary-button" data-action="itinerary-builder#addLeg">Add Leg</button>
+          <h2><%= t("search_requests.form.multi_city.title") %></h2>
+          <button type="button" class="secondary-button" data-action="itinerary-builder#addLeg"><%= t("search_requests.form.multi_city.add_leg") %></button>
         </div>
         <div class="legs-list" data-itinerary-builder-target="legsList"></div>
       </section>
@@ -70,26 +70,26 @@
       <template data-itinerary-builder-target="template">
         <div class="leg-row">
           <div class="field">
-            <label>Leg Position</label>
+            <label><%= t("search_requests.form.multi_city.position") %></label>
             <input type="number" name="search_request[itinerary_legs][][position]" min="1" max="4" required>
           </div>
           <div class="field">
-            <label>Origin Airport Code</label>
-            <input type="text" name="search_request[itinerary_legs][][origin_airport_code]" placeholder="TPE" required>
+            <label><%= t("search_requests.form.multi_city.origin_airport_code") %></label>
+            <input type="text" name="search_request[itinerary_legs][][origin_airport_code]" placeholder="<%= t("search_requests.form.multi_city.origin_placeholder") %>" required>
           </div>
           <div class="field">
-            <label>Destination Airport Code</label>
-            <input type="text" name="search_request[itinerary_legs][][destination_airport_code]" placeholder="KIX" required>
+            <label><%= t("search_requests.form.multi_city.destination_airport_code") %></label>
+            <input type="text" name="search_request[itinerary_legs][][destination_airport_code]" placeholder="<%= t("search_requests.form.multi_city.destination_placeholder") %>" required>
           </div>
           <div class="field">
-            <label>Departure Date</label>
+            <label><%= t("search_requests.form.multi_city.departure_on") %></label>
             <input type="date" name="search_request[itinerary_legs][][departure_on]">
           </div>
         </div>
       </template>
 
       <div class="actions">
-        <%= form.submit "Search Fares", class: "primary-button" %>
+        <%= form.submit t("search_requests.form.submit"), class: "primary-button" %>
       </div>
     <% end %>
   </section>
